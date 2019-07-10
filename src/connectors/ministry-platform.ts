@@ -1,6 +1,8 @@
 const MP = require('ministry-platform');
 const mp = new MP();
 
+
+//TO-DO: Make MP folder and separate out byyyyyyy schemas maybe? 
 function getCongregation(HouseholdID: number) {
     const filter = `Households.[Household_ID] = ${HouseholdID}`
     const table = 'Households'
@@ -14,8 +16,8 @@ function getCongregation(HouseholdID: number) {
         .get()
         .then(response => {
             return {
-                id: response.data[0].Congregation_Name,
-                name: response.data[0].Congregation_ID
+                id: response.data[0].Congregation_ID,
+                name: response.data[0].Congregation_Name
             }
         })
 }
@@ -29,8 +31,8 @@ function setCongregation(HouseholdID: number, SiteID: number) {
         }])
         .then(response => {
             return {
-                id: response.data[0].Congregation_Name,
-                name: response.data[0].Congregation_ID
+                id: response.data[0].Congregation_ID,
+                name: response.data[0].Congregation_Name
             }
         });
 }

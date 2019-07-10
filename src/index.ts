@@ -1,6 +1,6 @@
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
-import { Authentication } from './config';
+import { Authentication, logging } from './config';
 
 const app = express();
 
@@ -13,9 +13,17 @@ const server = new ApolloServer({
   resolvers,
   context: ({ req }) => {
     // get the user token from the headers
-    const token = req.headers.Authorization || '';
+    const token = req.headers.authorization || '';
     return Authentication(token);
-    //return Authentication('eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ijkyc3c1bmhtbjBQS3N0T0k1YS1nVVZlUC1NWSIsImtpZCI6Ijkyc3c1bmhtbjBQS3N0T0k1YS1nVVZlUC1NWSJ9.eyJpc3MiOiJGb3JtcyIsImF1ZCI6IkZvcm1zL3Jlc291cmNlcyIsImV4cCI6MTU2MTQwMTk2NSwibmJmIjoxNTYxNDAwMTY1LCJjbGllbnRfaWQiOiJDUkRTLkNvbW1vbiIsInNjb3BlIjpbIm9wZW5pZCIsIm9mZmxpbmVfYWNjZXNzIiwiaHR0cDovL3d3dy50aGlua21pbmlzdHJ5LmNvbS9kYXRhcGxhdGZvcm0vc2NvcGVzL2FsbCJdLCJzdWIiOiJiMzI2YWVmMi03N2U3LTQwNDItYjNiMS1kNWYxMzA1MDljMmUiLCJhdXRoX3RpbWUiOjE1NjEzNzg0MTUsImlkcCI6Imlkc3J2IiwibmFtZSI6ImpqYW5zc2VuQGNhbGxpYnJpdHkuY29tIiwiYW1yIjpbInBhc3N3b3JkIl19.uMYH4nPHRCcpDSkvzcblPMaW3tVdHPIag0voprn06fx0lluMJhREX5HM1rOh-i0XToyxOYT3GT7LhGtqkzq0lKZnJzufIe0nDhe7HlpF3n4w6MAPowIbPT50eczXMqZeQZeCLF1VdPqCd5Emgj90MO3IwY6XjDGeVXd4DaEtv_LO9YEpGBiZFQiB64st9EUZN3BXwJENpMly9SjRjjSJIPs3Kqxi6WzOjKqoQJ2V9dmniFAPBYXSOJXnmgMcPLqN1HYVDIRJcG5W0OWnj-HxjUXovaX1MG-Sq_x6L50m8wYDtRYhGtXsQ5RqpA_GwWg4BhGSTm83D07ipEdvdaTNTQ');
+    //return Authentication('eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ijkyc3c1bmhtbjBQS3N0T0k1YS1nVVZlUC1NWSIsImtpZCI6Ijkyc3c1bmhtbjBQS3N0T0k1YS1nVVZlUC1NWSJ9.eyJpc3MiOiJGb3JtcyIsImF1ZCI6IkZvcm1zL3Jlc291cmNlcyIsImV4cCI6MTU2MTQ5MzQzOSwibmJmIjoxNTYxNDkxNjM5LCJjbGllbnRfaWQiOiJDUkRTLkNvbW1vbiIsInNjb3BlIjpbImh0dHA6Ly93d3cudGhpbmttaW5pc3RyeS5jb20vZGF0YXBsYXRmb3JtL3Njb3Blcy9hbGwiLCJvZmZsaW5lX2FjY2VzcyIsIm9wZW5pZCJdLCJzdWIiOiJiMzI2YWVmMi03N2U3LTQwNDItYjNiMS1kNWYxMzA1MDljMmUiLCJhdXRoX3RpbWUiOjE1NjE0OTE2MzksImlkcCI6Imlkc3J2IiwibmFtZSI6ImpqYW5zc2VuQGNhbGxpYnJpdHkuY29tIiwiYW1yIjpbInBhc3N3b3JkIl19.pqWdOHGd-Aa0KcD-c6RqIvSPRM1sl6zVI1GMSApyev5Xh6lOBisML1YhDlrVjMrfZOIeRrudh2F4YfmhXAAjtAinfDBY5VaDF4JV5qgLk3EQ8K_d1nOFfWI1b6Ya1wyFdi0ppknrxVLbTUc_5JgXjyNABMCaPlcOgN8NNlcwbRSbTbWb4iQ1WDyk7fJWzP5vmbegSsoyn-zUfAVGLJ7Ge4jsyXQRSbFCCTafB_Zx_Tpf6JwrZFPVJK2ZLNTod6-jENDJhtAeoALRbGrmwy-LlATdGMJiqUvYOCXqxXNOcyyybV8RFqEPrKhLe1Qyp14mPG1pLLb0WwijEqxCfDyM4Q')
+  },
+  formatResponse: response => {
+    logging.logResponseBody(response);
+    return response;
+  },
+  formatError: error => {
+    logging.logError(error);
+    return error;
   },
 });
 
