@@ -9,7 +9,7 @@ exports.config = {
   /**
    * Array of application names.
    */
-  app_name: ['GraphQL-API'],
+  app_name: ['graphql-api'],
   /**
    * Your New Relic license key.
    */

@@ -1,13 +1,13 @@
 apiVersion: apps/v1
 kind: Deployment 
 metadata: 
-  name: GraphQL-API
+  name: graphql-api
   namespace: api
 spec: 
   replicas: 2
   selector:
     matchLabels:
-      app: GraphQL-API
+      app: graphql-api
   strategy: 
     type: RollingUpdate 
     rollingUpdate: 
@@ -16,10 +16,10 @@ spec:
   template: 
     metadata: 
       labels: 
-        app: GraphQL-API
+        app: graphql-api
     spec: 
       containers: 
-        - name: GraphQL-API
+        - name: graphql-api
           image: crdschurch/crds-graphql-api:$DOCKER_TAG 
           imagePullPolicy: Always 
           ports: 
