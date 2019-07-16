@@ -22,6 +22,25 @@ function getCongregation(HouseholdID: number) {
         })
 }
 
+function getGroups(ParticipantID: number) {
+    const filter = `Group_Participants.[Group_Participant_ID] = ${ParticipantID}`
+    const table = 'Group_Participants'
+    return mp
+        .withSelectColumns([
+            'Group_ID_Table.[Group_ID]',
+            'Group_ID_Table.[Group_Name]'
+        ])
+        .withFilter(filter)
+        .fromTable(table)
+        .get()
+        .then(response => {
+            return {
+                id: response.data[0].Group_ID,
+                name: response.data[0].Group_Name
+            }
+        })
+}
+
 function setCongregation(HouseholdID: number, SiteID: number) {
     return mp
         .fromTable(`households`)
@@ -37,4 +56,4 @@ function setCongregation(HouseholdID: number, SiteID: number) {
         });
 }
 
-export { getCongregation, setCongregation }; 
+export { getCongregation, setCongregation, getGroups }; 

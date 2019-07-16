@@ -20,6 +20,9 @@ const resolverMap: any = {
     site: (user, args, context) => {
       return mp.getCongregation(context.HouseholdId)
     },
+    groups: (user, args, context) => {
+      return mp.getGroups(context.ParticipantId)
+    }
   },
 };
 
