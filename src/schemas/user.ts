@@ -13,6 +13,6 @@ export default gql`
   type User {
    id: ID!
    site: Site
-   groups: [Groups]
+   groups: [Group!]
   }
 `;

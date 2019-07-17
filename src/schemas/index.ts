@@ -2,7 +2,7 @@ import { gql } from 'apollo-server-express';
 
 import userSchema from './user';
 import siteSchema from './site';
-import groupsSchema from './groups';
+import groupsSchema from './group';
 
 const linkSchema = gql`
   type Query {

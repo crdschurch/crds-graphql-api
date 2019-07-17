@@ -24,7 +24,7 @@
     "express": "^4.17.1",
     "graphql": "^14.3.1",
     "logzio-nodejs": "^1.0.6",
-    "ms": "file:node_modules/ms",
+    "ministry-platform": "^1.0.0",
     "newrelic": "^5.10.0",
     "rxjs": "^6.5.2",
     "typescript": "^3.5.3"

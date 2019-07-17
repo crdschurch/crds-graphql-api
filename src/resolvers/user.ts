@@ -1,10 +1,10 @@
-import { testData, mp } from './../connectors';
-import { IResolvers } from 'graphql-tools';
-import { Resolver } from 'dns';
+import { testData, mp } from "./../connectors";
+import { IResolvers } from "graphql-tools";
+import { Resolver } from "dns";
 
 const resolverMap: any = {
   Query: {
-    user: (parent, args, context ) => {
+    user: (parent, args, context) => {
       //context.userid is really however that is passed in on the headers
       return context;
     }
@@ -12,18 +12,19 @@ const resolverMap: any = {
 
   Mutation: {
     setSite: (parent, args, context) => {
-      return mp.setCongregation(context.HouseholdId, args.siteId)
+      return mp.setCongregation(context.HouseholdId, args.siteId);
     }
   },
 
   User: {
     site: (user, args, context) => {
-      return mp.getCongregation(context.HouseholdId)
+      return mp.getCongregation(context.HouseholdId);
     },
     groups: (user, args, context) => {
+      // return [{id: "1", name: "test"}];
       return mp.getGroups(context.ParticipantId)
     }
-  },
+  }
 };
 
 export default resolverMap;
