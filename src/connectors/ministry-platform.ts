@@ -1,12 +1,12 @@
 import { json } from "body-parser";
 
 const MP = require("ministry-platform");
-const mp = new MP();
 
 //TO-DO: Make MP folder and separate out byyyyyyy schemas maybe?
 function getCongregation(HouseholdID: number) {
   const filter = `Households.[Household_ID] = ${HouseholdID}`;
   const table = "Households";
+  const mp = new MP();
   return mp
     .withSelectColumns([
       "Congregation_ID_Table.[Congregation_ID]",
@@ -26,6 +26,7 @@ function getCongregation(HouseholdID: number) {
 function getGroups(ParticipantID: number) {
   const filter = `Group_Participants.[Participant_ID] = ${ParticipantID}`;
   const table = "Group_Participants";
+  const mp = new MP();
   return mp
     .withSelectColumns([
       "Group_ID_Table.[Group_ID]",
@@ -45,6 +46,7 @@ function getGroups(ParticipantID: number) {
 }
 
 function setCongregation(HouseholdID: number, SiteID: number) {
+  const mp = new MP();
   return mp
     .fromTable(`households`)
     .put([

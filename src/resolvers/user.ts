@@ -21,7 +21,6 @@ const resolverMap: any = {
       return mp.getCongregation(context.HouseholdId);
     },
     groups: (user, args, context) => {
-      // return [{id: "1", name: "test"}];
       return mp.getGroups(context.ParticipantId)
     }
   }
