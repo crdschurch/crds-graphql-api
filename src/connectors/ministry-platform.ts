@@ -29,8 +29,10 @@ function getGroups(ParticipantID: number) {
   const mp = new MP();
   return mp
     .withSelectColumns([
+      "Group_Participants.[Group_Role_ID]",
       "Group_ID_Table.[Group_ID]",
-      "Group_ID_Table.[Group_Name]"
+      "Group_ID_Table.[Group_Name]",
+      "Group_ID_Table.[Group_Type_ID]"
     ])
     .withFilter(filter)
     .fromTable(table)
@@ -39,7 +41,9 @@ function getGroups(ParticipantID: number) {
       return response.data.map(group => {
         return {
           id: group.Group_ID,
-          name: group.Group_Name
+          name: group.Group_Name,
+          role: group.Group_Role_ID,
+          type: group.Group_Type_ID
         };
       });
     });

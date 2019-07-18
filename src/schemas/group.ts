@@ -4,5 +4,7 @@ export default gql`
   type Group {
    id: ID!
    name: String!
+   role: ID!
+   type: ID!
   }
 `;
