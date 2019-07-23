@@ -6,7 +6,7 @@ let logger = require('logzio-nodejs').createLogger({
     timeout: 1000
 });
 
-const Application = 'GraphQL-API';
+const Application = 'graphql-api';
 
 export function logError(err) {
 

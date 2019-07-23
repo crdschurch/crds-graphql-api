@@ -1,4 +1,6 @@
 node_modules
 build
 dist
+newrelic_agent.log
+.env
 .envrc

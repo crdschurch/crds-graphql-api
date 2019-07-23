@@ -1,0 +1,14 @@
+apiVersion: v1 
+kind: Service 
+metadata: 
+  name: crds-graphql-api
+  namespace: api
+  labels: 
+    app: crds-graphql-api
+spec: 
+  ports: 
+  - name: node
+    port: 80
+    targetPort: 8000
+  selector:
+    app: graphql-api

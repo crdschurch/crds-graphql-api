@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment 
+metadata: 
+  name: graphql-api
+  namespace: api
+spec: 
+  replicas: 2
+  selector:
+    matchLabels:
+      app: graphql-api
+  strategy: 
+    type: RollingUpdate 
+    rollingUpdate: 
+      maxSurge: 2
+      maxUnavailable: 0
+  template: 
+    metadata: 
+      labels: 
+        app: graphql-api
+    spec: 
+      containers: 
+        - name: graphql-api
+          image: crdschurch/crds-graphql-api:$DOCKER_TAG 
+          imagePullPolicy: Always 
+          ports: 
+            - containerPort: 80 
+          resources: 
+            limits: 
+              memory: "2Gi"
+              cpu: "700m" 
+            requests: 
+              memory: "16Mi" 
+              cpu: "100m" 
+          readinessProbe:
+            httpGet:
+              path: /.well-known/apollo/server-health
+              port: 8000
+            initialDelaySeconds: 1
+            timeoutSeconds: 3
+            successThreshold: 1
+            periodSeconds: 3
+          env:
+            - name: MP_REST_API_ENDPOINT
+              value: $MP_REST_API_ENDPOINT
+            - name: MP_OAUTH_BASE_URL
+              value: $MP_OAUTH_BASE_URL
+            - name: MP_USERNAME
+              value: $MP_USERNAME
+            - name: MP_PASSWORD
+              value: $MP_PASSWORD
+            - name: MP_CLIENT_ID
+              value: $MP_CLIENT_ID
+            - name: MP_CLIENT_SECRET
+              value: $MP_CLIENT_SECRET
+            - name: AUTH_ENDPOINT
+              value: $AUTH_ENDPOINT
+            - name: LOGZ_IO_KEY
+              value: $LOGZ_IO_KEY
+            - name: CRDS_ENV
+              value: $CRDS_ENV
+            - name: NEW_RELIC_LICENSE_KEY            
+              value: $NR_INSTALL_KEY
+            - name: NEW_RELIC_APP_NAME
+              value: $NR_APP_NAME
+            - name: NEW_RELIC_DISTRIBUTED_TRACING_ENABLED
+              value: $NEW_RELIC_DISTRIBUTED_TRACING_ENABLED
+

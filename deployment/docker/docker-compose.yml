@@ -1,0 +1,10 @@
+version: '3'
+services:
+  node:
+    image: crdschurch/crds-graphql-api:${DOCKER_TAG:-local}
+    build:
+      context: ../../
+      dockerfile: ./deployment/docker/Dockerfile
+    container_name: graphql-api
+    ports:
+      - 8000:8000
