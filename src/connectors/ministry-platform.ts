@@ -52,7 +52,7 @@ function getGroups(ParticipantID: number) {
 function setCongregation(HouseholdID: number, SiteID: number) {
   const mp = new MP();
   return mp
-    .fromTable(`households`)
+    .fromTable('households')
     .put([
       {
         Household_ID: HouseholdID,
@@ -67,4 +67,23 @@ function setCongregation(HouseholdID: number, SiteID: number) {
     });
 }
 
-export { getCongregation, setCongregation, getGroups };
+function getSites() {
+  const mp = new MP();
+  return mp
+    .withSelectColumns([
+      "Congregations.[Congregation_ID]",
+      "Congregations.[Congregation_Name]"
+    ])
+    .fromTable('congregations')
+    .get()
+    .then(response => {
+      return response.data.map(site => {
+        return {
+          id: site.Congregation_ID,
+          name: site.Congregation_Name
+        };
+      });
+    });
+}
+
+export { getCongregation, setCongregation, getGroups, getSites };
