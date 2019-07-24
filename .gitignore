@@ -3,5 +3,4 @@ build
 dist
 newrelic_agent.log
 .env
-newrelic_agent.log
 .envrc
