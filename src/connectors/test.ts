@@ -31,8 +31,20 @@ let sites = [
     }
 ];
 
+let groups = [
+    {
+        name: 'Group 1',
+        id: 6
+    },
+    {
+        name: 'Group 2',
+        id: 7
+    }
+];
+
 export default {
     users,
     households,
-    sites
+    sites,
+    groups
 };

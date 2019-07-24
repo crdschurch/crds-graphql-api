@@ -1,12 +1,10 @@
 import { gql } from 'apollo-server-express';
 
 export default gql`
-  extend type Query {
-    sites: [Site!]
-  }
-
-  type Site {
+  type Group {
    id: ID!
    name: String!
+   role: ID!
+   type: ID!
   }
 `;
