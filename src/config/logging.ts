@@ -14,7 +14,7 @@ export function logError(err) {
         application: Application,
         environment: process.env.CRDS_ENV,
         level: 'error',
-        message: err && err.originalError && err.originalError.response.data.Message || err.message,
+        message: err && err.originalError && err.originalError.response && err.originalError.response.data.Message || err.message,
         request: err.source && err.source.body
     };
 
@@ -24,7 +24,7 @@ export function logError(err) {
 
 export function logResponseBody(res) {
 
-    if(res.data.__schema) return;
+    if(res && res.data.__schema) return;
     var log = {
         application: Application,
         environment: process.env.CRDS_ENV,

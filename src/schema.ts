@@ -1,8 +1,7 @@
 import { gql } from 'apollo-server-express';
-
-import userSchema from './user';
-import siteSchema from './site';
-import groupsSchema from './group';
+import userSchema from './graph/users/users.schema';
+import siteSchema from './graph/sites/sites.schema';
+import groupsSchema from './graph/groups/groups.schema';
 
 const linkSchema = gql`
   type Query {
