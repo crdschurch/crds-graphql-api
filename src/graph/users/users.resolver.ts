@@ -5,7 +5,6 @@ import container from "../../ioc/inversify.config";
 export const UserResolver = {
   Query: {
     user: (parent, args, context) => {
-      //context.userid is really however that is passed in on the headers
       return context;
     }
   },

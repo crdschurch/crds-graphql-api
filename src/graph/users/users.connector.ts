@@ -69,9 +69,6 @@ export class UsersConnector implements IUsersConnector {
                     name: response.data[0].Congregation_Name
                 };
             })
-            .catch(err=> {
-                console.log(err);
-            })
     }
 
 }
