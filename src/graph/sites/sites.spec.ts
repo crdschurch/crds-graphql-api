@@ -45,17 +45,11 @@ export class MocksSitesConnector implements ISitesConnector {
 }
 
 it('fetches sites', async () => {
-    container.rebind<MocksSitesConnector>(Types.SitesConnector)
-        .to(MocksSitesConnector);
-    container.rebind<MockAuthConnector>(Types.AuthConnector)
-        .to(MockAuthConnector);
-
-    const authConnector: IAuthConnector = container.get<IAuthConnector>(Types.AuthConnector);
-
     const server = new ApolloServer({
         typeDefs: schema,
         resolvers: resolvers,
-        context: () => (authConnector.authenticate('fakeTokenDoesntMatter')),
+        context: () => (new MockAuthConnector().authenticate('fakeTokenDoesntMatter')),
+        dataSources: (): any => ({sitesConnector: new MocksSitesConnector()})
     });
 
     const { query } = createTestClient(server);

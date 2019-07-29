@@ -1,13 +1,13 @@
 const axios = require("axios");
 import { injectable } from "inversify";
-import { IAuthConnector } from './auth.interface';
+import { IAuthConnector, IAuthData } from './auth.interface';
 
 @injectable()
 export class AuthConnector implements IAuthConnector {
     constructor() {
     }
 
-    public authenticate(token): Promise<any> {
+    public authenticate(token): Promise<IAuthData> {
         const config = {
             headers: {
                 'Authorization': token
@@ -15,7 +15,9 @@ export class AuthConnector implements IAuthConnector {
         };
         return axios.get(process.env.AUTH_ENDPOINT, config)
             .then(authResponse => {
-                return authResponse.data.UserInfo.Mp;
+                return {
+                    authData: authResponse.data.UserInfo.Mp
+                };
             })
     }
 }
