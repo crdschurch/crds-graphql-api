@@ -12,11 +12,11 @@ export class MockAuthConnector implements IAuthConnector {
                 authData: {
                     CanImpersonate: false,
                     ContactId: 7777294,
-                    DonorId: 7748361,
-                    Email: "jjanssen@callibrity.com",
-                    HouseholdId: 5827106,
-                    ParticipantId: 7658964,
-                    UserId: 4490059
+                    DonorId: 7745938,
+                    Email: "mpcrds+auto+2@gmail.com",
+                    HouseholdId: 5819396,
+                    ParticipantId: 7654359,
+                    UserId: 4488274
                 }
             });
         })
@@ -29,11 +29,11 @@ it('fetches MP auth data', async () => {
         authData: {
             CanImpersonate: false,
             ContactId: 7777294,
-            DonorId: 7748361,
-            Email: "jjanssen@callibrity.com",
-            HouseholdId: 5827106,
-            ParticipantId: 7658964,
-            UserId: 4490059
+            DonorId: 7745938,
+            Email: "mpcrds+auto+2@gmail.com",
+            HouseholdId: 5819396,
+            ParticipantId: 7654359,
+            UserId: 4488274
         }
     });
 });
