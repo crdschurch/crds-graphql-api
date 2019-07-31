@@ -55,12 +55,7 @@ export class GraphqlServer {
             plugins: [responseCachePlugin({
                 sessionId: (requestContext) => (requestContext.request.http.headers.get('authorization') || null),
               })],
-            cache: new RedisCache({
-                host: process.env.REDIS_HOST,
-                port: '6379',
-                password: process.env.REDIS_PASSWORD,
-                db: process.env.REDIS_DB
-              }),
+            cache: new RedisCache(`redis://:${process.env.REDIS_PASSWORD}@${process.env.REDIS_HOST}/${process.env.REDIS_DB}`),
         });
 
         server.applyMiddleware({ app, path: "/graphql" })
