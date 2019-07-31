@@ -1,4 +1,5 @@
 import { Container } from "inversify";
+import "reflect-metadata";
 import { UsersConnector } from "../graph/users/users.connector";
 import { GraphqlServer } from "../graphql";
 import { Server } from "../server";
