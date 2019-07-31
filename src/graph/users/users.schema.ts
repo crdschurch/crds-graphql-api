@@ -10,7 +10,7 @@ export default gql`
     setSite(siteId: ID!): User
   }
   
-  type User {
+  type User @cacheControl(scope: PRIVATE, maxAge: 3600) {
    id: ID!
    site: Site
    groups: [Group!]

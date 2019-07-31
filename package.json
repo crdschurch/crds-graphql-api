@@ -21,8 +21,10 @@
   },
   "homepage": "https://github.com/crdschurch/crds-graphql-api#readme",
   "dependencies": {
+    "apollo-server-cache-redis": "^1.1.1",
     "apollo-server-core": "^2.7.2",
     "apollo-server-express": "^2.7.2",
+    "apollo-server-plugin-response-cache": "^0.3.1",
     "axios": "^0.19.0",
     "express": "^4.17.1",
     "graphql": "^14.3.1",

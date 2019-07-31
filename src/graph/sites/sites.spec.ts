@@ -4,11 +4,8 @@ import schema from '../../schema';
 import resolvers from '../../resolvers';
 import { injectable } from 'inversify';
 import { ISite, ISitesConnector } from '../sites/sites.interface';
-import container from "../../ioc/inversify.config";
 import "reflect-metadata";
-import { Types } from '../../ioc/types';
 import { MockAuthConnector } from '../auth/auth.spec';
-import { IAuthConnector } from '../auth/auth.interface';
 
 @injectable()
 export class MocksSitesConnector implements ISitesConnector {
