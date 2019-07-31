@@ -64,4 +64,9 @@ spec:
               value: $NR_APP_NAME
             - name: NEW_RELIC_DISTRIBUTED_TRACING_ENABLED
               value: $NEW_RELIC_DISTRIBUTED_TRACING_ENABLED
-
+            - name: REDIS_HOST
+              value: $REDIS_HOST
+            - name: REDIS_PASSWORD
+              value: $REDIS_PASSWORD
+            - name: REDIS_DB
+              value: $REDIS_DB
