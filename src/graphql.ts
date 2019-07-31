@@ -59,6 +59,7 @@ export class GraphqlServer {
                 host: process.env.REDIS_HOST,
                 port: '6379',
                 password: process.env.REDIS_PASSWORD,
+                db: process.env.REDIS_DB
               }),
         });
 
