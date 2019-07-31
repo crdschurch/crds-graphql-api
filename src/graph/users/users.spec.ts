@@ -6,11 +6,8 @@ import { injectable } from 'inversify';
 import { IUsersConnector } from './users.interface';
 import { ISite } from '../sites/sites.interface';
 import { IGroup } from '../groups/groups.interface';
-import container from "../../ioc/inversify.config";
 import "reflect-metadata";
-import { Types } from '../../ioc/types';
 import { MockAuthConnector } from '../auth/auth.spec';
-import { IAuthConnector } from '../auth/auth.interface';
 
 @injectable()
 export class MockUsersConnector implements IUsersConnector {

@@ -9,6 +9,8 @@ import { IAuthConnector } from "./graph/auth/auth.interface";
 import * as logging from "./config/logging";
 import { IUsersConnector } from "./graph/users/users.interface";
 import { ISitesConnector } from "./graph/sites/sites.interface";
+import { RedisCache } from "apollo-server-cache-redis";
+import responseCachePlugin from "apollo-server-plugin-response-cache";
 
 @injectable()
 export class GraphqlServer {
@@ -49,19 +51,19 @@ export class GraphqlServer {
             formatError: error => {
                 logging.logError(error);
                 return error;
-            }
+            },
+            plugins: [responseCachePlugin({
+                sessionId: (requestContext) => (requestContext.request.http.headers.get('authorization') || null),
+              })],
+            cache: new RedisCache(`redis://:${process.env.REDIS_PASSWORD}@${process.env.REDIS_HOST}/${process.env.REDIS_DB}`),
         });
 
         server.applyMiddleware({ app, path: "/graphql" })
 
-        app.listen({ port: 8000 }, () => {
-
-        });
+        app.listen({ port: 8000 }, () => {});
     }
 
     public stop() {
         this.serverInstance.close();
     }
-
-
 }

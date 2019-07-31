@@ -1,7 +1,5 @@
 import { IAuthConnector } from "./auth.interface";
-import container from "../../ioc/inversify.config";
 import "reflect-metadata";
-import { Types } from "../../ioc/types";
 import { injectable } from "inversify";
 
 @injectable()
