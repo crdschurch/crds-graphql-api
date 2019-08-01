@@ -18,7 +18,7 @@ export class Server {
     public start(): void {
         this.graphqlServer.start();
     }
-    
+
     public stop(): void {
         this.graphqlServer.stop();
     }
