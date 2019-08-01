@@ -1,8 +1,6 @@
 # crds-graphql-api
 
-[![Teamcity Status](<https://ci.crossroads.net/viewLog.html?buildId=67929&buildTypeId=Api_GraphQLApi_Build_2Development)/statusIcon.svg>)](https://ci.crossroads.net/viewLog.html?buildId=67929&buildTypeId=Api_GraphQLApi_Build_2Development)
-
-Central GraphQL service to consume and graph all data microservices. 
+Central GraphQL service to consume and graph all data microservices. Built and deployed to Kubernetes via TeamCity.
 
 ## Quick Start
 It is recommended that you first become familiar with graphql theory and implementation here (https://www.apollographql.com/docs/). This project uses Apollo for creating the GraphQL server on top of Express. 
@@ -39,7 +37,7 @@ export NEW_RELIC_LICENSE_KEY=
 The rest of the environment variables are being loaded from vault (https://vault.crossroads.net/) using the crds-vault-node package (https://github.com/crdschurch/crds-vault-node) with the corresponding ENV listed above. We are loading both the `common` and `graphql` secrets.
 
 #### Create a new model
-To create a new model for querying and mutating, you will create a folder inside of `src/graph/`. I will use the `sites` folder as an example here. If you should be able to query your new model by itself, then `sites` is a good template to follow. Compare `get sites` or `get site by ID` VS `get groups a user belongs to`. To retrieve a group a user belongs to, you don't actually need to ever fetch groups by themselves so a `groups` resolver and connector would be unnecessary (You would put the resolver and connector functions in the `users` classes for that). But in the instance of `get all sites`, it is necessary to specifically have a GraphQL query for `sites` meaning you do need a connector and a resolver. It may be easiest to copy the `sites` folder rename the files and their contents accordingly to match your new model. 
+To create a new model for querying and mutating, you will create a folder inside of `src/graph/`. I will use the `sites` folder as an example here. If you should be able to query your new model by itself, then `sites` is a good template to follow. Compare `get sites` or `get site by ID` VS `get groups a user belongs to`. To retrieve a group a user belongs to, you don't actually need to ever fetch groups by themselves so a `groups` resolver and connector would be unnecessary (You would put the resolver and connector functions in the `users` classes for that). But in the instance of `get all sites`, it is necessary to specifically have a GraphQL query for `sites` meaning you do need a connector and a resolver. It may be easiest to copy the `sites` folder and rename the files and their contents accordingly to match your new model. 
 
 Once you have your new model and folder along with all of it's files, you will need to bind the connector to the container (we use inversifyJS here). To do this, add the connector binding to the `src/ioc/inversify.config.ts` file. You will also need to declare a symbol for this connector in the `src/ioc/types` folder for future use with dependency injection. Once this is completed you can inject the new connector in the constructor of the `GraphqlServer` in `src/graphql.ts`. Once injected, you can include it in the constructor of the ApolloServer in `dataSources`. This will allow that connector to be available in your resolvers in the `context` (`context.dataSources.${modelConnector}`) object that is passed in. This allows for easy unit tests by being able to mock the connector off of your interface and then directly injecting it into `dataSources` for your ApolloTestServer instead of injecting the actual concrete implementation. 
 
