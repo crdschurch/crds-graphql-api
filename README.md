@@ -1,8 +1,6 @@
 # crds-graphql-api
 
-[![Teamcity Status](<https://ci.crossroads.net/viewLog.html?buildId=67929&buildTypeId=Api_GraphQLApi_Build_2Development)/statusIcon.svg>)](https://ci.crossroads.net/viewLog.html?buildId=67929&buildTypeId=Api_GraphQLApi_Build_2Development)
-
-Central GraphQL service to consume and graph all data microservices. 
+Central GraphQL service to consume and graph all data microservices. Built and deployed to Kubernetes via TeamCity.
 
 ## Quick Start
 It is recommended that you first become familiar with graphql theory and implementation here (https://www.apollographql.com/docs/). This project uses Apollo for creating the GraphQL server on top of Express. 
