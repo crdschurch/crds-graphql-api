@@ -11,6 +11,7 @@ import { IUsersConnector } from "./graph/users/users.interface";
 import { ISitesConnector } from "./graph/sites/sites.interface";
 import { RedisCache } from "apollo-server-cache-redis";
 import responseCachePlugin from "apollo-server-plugin-response-cache";
+import { Vault } from "crds-vault-node";
 
 @injectable()
 export class GraphqlServer {
@@ -28,8 +29,9 @@ export class GraphqlServer {
     ) { }
 
     public async start(): Promise<void> {
-
+        
         let app = this.app;
+        await new Vault(process.env.ENV).process(['common', 'graphql']);
         logging.init();
 
         const server = new ApolloServer({
