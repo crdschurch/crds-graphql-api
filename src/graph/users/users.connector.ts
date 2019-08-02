@@ -70,5 +70,4 @@ export class UsersConnector implements IUsersConnector {
                 };
             })
     }
-
 }

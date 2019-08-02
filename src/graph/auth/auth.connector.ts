@@ -13,7 +13,7 @@ export class AuthConnector implements IAuthConnector {
                 'Authorization': token
             }
         };
-        return axios.get(process.env.AUTH_ENDPOINT, config)
+        return axios.get(`${process.env.AUTH_SERVICE_BASE_URL}/api/authorize`, config)
             .then(authResponse => {
                 return {
                     authData: authResponse.data.UserInfo.Mp
