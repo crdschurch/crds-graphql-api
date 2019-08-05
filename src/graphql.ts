@@ -31,7 +31,7 @@ export class GraphqlServer {
     public async start(): Promise<void> {
         
         let app = this.app;
-        await new Vault(process.env.ENV).process(['common', 'graphql']);
+        await new Vault(process.env.CRDS_ENV).process(['common', 'graphql']);
         console.log(process.env);
         logging.init();
 
