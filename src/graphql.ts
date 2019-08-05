@@ -32,6 +32,7 @@ export class GraphqlServer {
         
         let app = this.app;
         await new Vault(process.env.ENV).process(['common', 'graphql']);
+        console.log(process.env);
         logging.init();
 
         const server = new ApolloServer({
@@ -39,6 +40,7 @@ export class GraphqlServer {
             resolvers,
             context: ({ req }) => {
                 const token = req.headers.authorization || ""
+                console.log('context creation');
                 return this.authConnector.authenticate(token);
             },
             dataSources: (): any => {
@@ -63,7 +65,7 @@ export class GraphqlServer {
 
         server.applyMiddleware({ app, path: "/graphql" })
 
-        app.listen({ port: 8000 }, () => { });
+        app.listen({ port: 8000 }, () => { console.log('listening on 8000') });
     }
 
     public stop() {
