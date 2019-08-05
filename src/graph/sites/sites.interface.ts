@@ -1,5 +1,5 @@
 export interface ISitesConnector {
-    getSites(): Promise<ISite[]>
+    getSites(filters?: string): Promise<ISite[]>
 }
 
 export interface ISite {

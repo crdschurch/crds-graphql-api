@@ -4,15 +4,16 @@ const MP = require("ministry-platform");
 
 @injectable()
 export class SitesConnector implements ISitesConnector {
-    
-    public getSites(): Promise<ISite[]> {
+
+    public getSites(filter?: string): Promise<ISite[]> {
         const mp = new MP();
         return mp
             .withSelectColumns([
-                "Congregations.[Congregation_ID]",
-                "Congregations.[Congregation_Name]"
+                "[Congregation_ID]",
+                "[Congregation_Name]"
             ])
-            .fromTable('congregations')
+            .withFilter(filter || '')
+            .fromTable('Congregations')
             .get()
             .then(response => {
                 return response.data.map(site => {
@@ -21,6 +22,8 @@ export class SitesConnector implements ISitesConnector {
                         name: site.Congregation_Name
                     };
                 });
-            });
+            }).catch(err => {
+                console.log(err);
+            })
     }
 }
