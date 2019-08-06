@@ -1,12 +1,15 @@
 import express from 'express';
 import newrelic from 'newrelic';
 
-let logger = require('logzio-nodejs').createLogger({
-    token: process.env.LOGZ_IO_KEY,
-    timeout: 1000
-});
-
 const Application = 'graphql-api';
+let logger;
+
+export function init() {
+    logger = require('logzio-nodejs').createLogger({
+        token: process.env.LOGZIO_API_TOKEN,
+        timeout: 1000
+    });
+}
 
 export function logError(err) {
 
@@ -14,7 +17,7 @@ export function logError(err) {
         application: Application,
         environment: process.env.CRDS_ENV,
         level: 'error',
-        message: err && err.originalError && err.originalError.response.data.Message || err.message,
+        message: err && err.originalError && err.originalError.response && err.originalError.response.data.Message || err.message,
         request: err.source && err.source.body
     };
 
@@ -24,7 +27,7 @@ export function logError(err) {
 
 export function logResponseBody(res) {
 
-    if(res.data.__schema) return;
+    if (res && res.data.__schema) return;
     var log = {
         application: Application,
         environment: process.env.CRDS_ENV,
