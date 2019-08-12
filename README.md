@@ -8,7 +8,7 @@ It is recommended that you first become familiar with graphql theory and impleme
 1. Clone the repo: `git clone https://github.com/crdschurch/crds-graphql-api`
 2. Get Vault and New Relic env vars
 3. Run `npm i` to add dependencies
-4. Run `npm watch` to compile the ts to js in the `/dist` folder and watch for file updates.
+4. Run `npm run watch` to compile the ts to js in the `/dist` folder and watch for file updates.
 5. Launch the server locally by either launching via the debugger in VSCode against Node (preferred method because you get easy debugging and breakpoints in vs         code via the mapped /src/*.ts to /dist/*.js) or by running `npm run start`.
 6. You should now be able to visit localhost:8000 and see the included UI for ApolloServer. 
 7. To execute any query or mutation you will need a valid Auth Token. To retrieve this you can login at int.crossroads.net and copy the value for the intsessionId      cookie in the browser. Paste your auth token as a header - found in the bottom left of the UI as a JSON object. `{"authorization": "${yourAuthTokenHere}"}. `
@@ -31,7 +31,7 @@ We are also logging requests, reseponses and errors to logz.io.
 .envrc Sample: 
 export VAULT_ROLE_ID=
 export VAULT_SECRET_ID=
-export ENV=local
+export CRDS_ENV=local
 export NEW_RELIC_LICENSE_KEY=
 
 The rest of the environment variables are being loaded from vault (https://vault.crossroads.net/) using the crds-vault-node package (https://github.com/crdschurch/crds-vault-node) with the corresponding ENV listed above. We are loading both the `common` and `graphql` secrets.
