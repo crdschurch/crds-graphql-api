@@ -12,6 +12,7 @@ import { ISitesConnector } from "./graph/sites/sites.interface";
 import { RedisCache } from "apollo-server-cache-redis";
 import responseCachePlugin from "apollo-server-plugin-response-cache";
 import { Vault } from "crds-vault-node";
+import { ILifeStageConnector } from "./graph/life-stages/life-stage.interface";
 
 @injectable()
 export class GraphqlServer {
@@ -25,7 +26,8 @@ export class GraphqlServer {
     constructor(
         @inject(Types.AuthConnector) private authConnector: IAuthConnector,
         @inject(Types.UsersConnector) private usersConnector: IUsersConnector,
-        @inject(Types.SitesConnector) private sitesConnector: ISitesConnector
+        @inject(Types.SitesConnector) private sitesConnector: ISitesConnector,
+        @inject(Types.LifeStageConnector) private lifeStageConnector: ILifeStageConnector
     ) { }
 
     public async start(): Promise<void> {
@@ -46,7 +48,8 @@ export class GraphqlServer {
             dataSources: (): any => {
                 return {
                     usersConnector: this.usersConnector,
-                    sitesConnector: this.sitesConnector
+                    sitesConnector: this.sitesConnector,
+                    lifeStageConnect: this.lifeStageConnector
                 };
             },
             formatResponse: response => {
