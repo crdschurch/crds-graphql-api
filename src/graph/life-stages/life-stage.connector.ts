@@ -13,18 +13,18 @@ export class LifeStageConnector implements ILifeStageConnector {
     environment: process.env.CONTENTFUL_ENV
   }
 
-  public getLifeStages(filter?: string) {
+  public getLifeStages(filter?: string): Promise<ILifeStage[]> {
     const client = createClient(this.contentfulConfig);
 
-    client.getContentType('life_stage')
-      .then(data => {
-        return data;
+    return client.getContentType('life_stage')
+      .then(response => {
+        return response.fields.map(fields => {
+          return {
+              title: 'title',
+              description: 'description',
+              imageUrl: 'imageUrl'
+          }
+        })
       })
-    
-    return {
-      title: "yo",
-      description: "super yo",
-      imageUrl: "I'm a url"
-    };
   }
 }
