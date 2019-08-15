@@ -8,6 +8,7 @@ import { ISite } from '../sites/sites.interface';
 import { IGroup } from '../groups/groups.interface';
 import "reflect-metadata";
 import { MockAuthConnector } from '../auth/auth.spec';
+import { ILifeStage } from '../life-stages/life-stage.interface';
 
 @injectable()
 export class MockUsersConnector implements IUsersConnector {
@@ -17,7 +18,7 @@ export class MockUsersConnector implements IUsersConnector {
         })
     }
 
-    public getGroups(ParticipantID: number): Promise<IGroup[]> {
+    public getGroups(UserID: number): Promise<IGroup[]> {
         return new Promise((resolve, reject) => {
             resolve([{
                 id: 1,
@@ -33,6 +34,17 @@ export class MockUsersConnector implements IUsersConnector {
             resolve({ id: 1, name: 'Oakley' });
         });
     }
+
+
+    public setLifeStage(UserID: number, LifeStage: ILifeStage): Promise<ILifeStage> {
+        return new Promise((resolve, reject) => {
+            resolve();
+        });
+    }
+
+    public getLifeStage(UserID: number): Promise<ILifeStage> {
+        return null;
+    } 
 }
 
 it('fetches single user with site', async () => {

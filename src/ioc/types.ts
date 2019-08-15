@@ -4,5 +4,7 @@ export const Types = {
     UsersConnector: Symbol("UsersConnector"),
     AuthConnector: Symbol("AuthConnector"),
     Server: Symbol("Server"),
-    SitesConnector: Symbol("SitesConnector")
+    SitesConnector: Symbol("SitesConnector"),
+    LifeStageConnector: Symbol("LifeStageConnector"),
+    Mongo: Symbol("Mongo")
 };
