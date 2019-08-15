@@ -1,10 +1,13 @@
 import { ISite } from "../sites/sites.interface";
 import { IGroup } from "../groups/groups.interface";
+import { ILifeStage } from "../life-stages/life-stage.interface";
+import { Mongo } from "../../sources/mongo";
 
 export interface IUsersConnector {
     getCongregation(HouseholdID: number): Promise<ISite>
-    getGroups(ParticipantID: number): Promise<IGroup[]>
+    getGroups(UserID: number): Promise<IGroup[]>
     setCongregation(HouseholdID: number, SiteID: number): Promise<ISite>
+    getLifeStage(UserID: number, Mongo: Mongo): Promise<ILifeStage>
 }
 
 export interface IUser {

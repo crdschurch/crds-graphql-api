@@ -2,6 +2,7 @@ import express from "express";
 import { inject, injectable } from "inversify";
 import { GraphqlServer } from "./graphql";
 import { Types } from "./ioc/types";
+import { Vault } from "crds-vault-node";
 
 @injectable()
 export class Server {

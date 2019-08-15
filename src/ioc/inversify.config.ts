@@ -7,6 +7,7 @@ import { Types } from "./types";
 import { AuthConnector } from "../graph/auth/auth.connector";
 import { SitesConnector } from "../graph/sites/sites.connector";
 import { LifeStageConnector } from "../graph/life-stages/life-stage.connector";
+import { Mongo } from "../sources/mongo";
 
 var container = new Container();
 
@@ -23,5 +24,7 @@ container.bind<SitesConnector>(Types.SitesConnector)
     .to(SitesConnector);
 container.bind<LifeStageConnector>(Types.LifeStageConnector)
     .to(LifeStageConnector);
+container.bind<Mongo>(Types.Mongo)
+    .to(Mongo);
 
 export default container;

@@ -13,6 +13,7 @@ import { RedisCache } from "apollo-server-cache-redis";
 import responseCachePlugin from "apollo-server-plugin-response-cache";
 import { Vault } from "crds-vault-node";
 import { ILifeStageConnector } from "./graph/life-stages/life-stage.interface";
+import { Mongo } from "./sources/mongo";
 
 @injectable()
 export class GraphqlServer {
@@ -27,14 +28,13 @@ export class GraphqlServer {
         @inject(Types.AuthConnector) private authConnector: IAuthConnector,
         @inject(Types.UsersConnector) private usersConnector: IUsersConnector,
         @inject(Types.SitesConnector) private sitesConnector: ISitesConnector,
-        @inject(Types.LifeStageConnector) private lifeStageConnector: ILifeStageConnector
+        @inject(Types.LifeStageConnector) private lifeStageConnector: ILifeStageConnector,
+        @inject(Types.Mongo) private mongo: Mongo
     ) { }
 
     public async start(): Promise<void> {
         
         let app = this.app;
-        await new Vault(process.env.CRDS_ENV).process(['common', 'graphql']);
-        console.log(process.env);
         logging.init();
 
         const server = new ApolloServer({
@@ -42,13 +42,13 @@ export class GraphqlServer {
             resolvers,
             context: ({ req }) => {
                 const token = req.headers.authorization || ""
-                console.log('context creation');
                 return this.authConnector.authenticate(token);
             },
             dataSources: (): any => {
                 return {
                     usersConnector: this.usersConnector,
                     sitesConnector: this.sitesConnector,
+                    mongo: this.mongo,
                     lifeStageConnector: this.lifeStageConnector
                 };
             },
