@@ -76,8 +76,18 @@ export class UsersConnector implements IUsersConnector {
     public getLifeStage(UserID: number, Mongo: Mongo): Promise<ILifeStage> {
         const db = Mongo.client.db('personalization');
         const collection = db.collection('users');
-        return collection.findOne({ userId: UserID }, { lifeStage: true }).then((document) => {
-            return document.lifeStage
-        });
+        return collection.findOne({ userId: UserID }, { lifeStage: true })
+            .then((document) => {
+                return document.lifeStage
+            });
+    }
+
+    public setLifeStage(UserID: number, lifeStage: ILifeStage, Mongo: Mongo): Promise<ILifeStage> {
+        const db = Mongo.client.db('personalization');
+        const collection = db.collection('users');
+        return collection.updateOne({ userId: UserID }, { $set: { lifeStage: lifeStage } }, { upsert: true })
+            .then((document) => {
+                return this.getLifeStage(UserID, Mongo);
+            });
     }
 }

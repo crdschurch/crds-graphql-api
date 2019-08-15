@@ -8,6 +8,7 @@ export interface IUsersConnector {
     getGroups(UserID: number): Promise<IGroup[]>
     setCongregation(HouseholdID: number, SiteID: number): Promise<ISite>
     getLifeStage(UserID: number, Mongo: Mongo): Promise<ILifeStage>
+    setLifeStage(UserID: number, lifeStage: ILifeStage, Mongo: Mongo):  Promise<ILifeStage>
 }
 
 export interface IUser {

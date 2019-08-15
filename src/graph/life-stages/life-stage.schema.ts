@@ -12,4 +12,9 @@ export default gql`
     description: String!
     imageUrl: String!
   }
+
+  input LifeStageInput {
+    id: String!
+    title: String!
+  }
 `;
