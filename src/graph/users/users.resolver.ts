@@ -1,6 +1,3 @@
-import { IUsersConnector } from "./users.interface";
-import { Types } from "../../ioc/types";
-import container from "../../ioc/inversify.config";
 import { IContext } from "../context/context.interface";
 
 export const UserResolver = {

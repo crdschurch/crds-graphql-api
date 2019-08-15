@@ -5,16 +5,15 @@ import { createClient } from "contentful";
 @injectable()
 export class LifeStageConnector implements ILifeStageConnector {
 
-  public getLifeStages(): Promise<ILifeStage[]> {
-    const client = createClient({
-      accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
-      space: process.env.CONTENTFUL_SPACE_ID,
-      environment: process.env.CONTENTFUL_ENV
-    });
+  private client = createClient({
+    accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+    space: process.env.CONTENTFUL_SPACE_ID,
+    environment: process.env.CONTENTFUL_ENV
+  });
 
-    return client.getEntries({content_type: 'life_stage'})
+  public getLifeStages(): Promise<ILifeStage[]> {
+    return this.client.getEntries({ content_type: 'life_stage' })
       .then(response => {
-        console.log(response);
         return response.items.map((item: any) => {
           return {
             id: item.sys.id,
@@ -27,15 +26,8 @@ export class LifeStageConnector implements ILifeStageConnector {
   }
 
   public getLifeStageContent(id: string): Promise<ILifeStageContent[]> {
-    const client = createClient({
-      accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
-      space: process.env.CONTENTFUL_SPACE_ID,
-      environment: process.env.CONTENTFUL_ENV
-    });
-
-    return client.getEntry(id)
+    return this.client.getEntry(id)
       .then((response: any) => {
-        console.log(response.fields.content);
         return response.fields.content.map((item: any) => {
           return {
             id: item.sys.id,

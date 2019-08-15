@@ -1,6 +1,6 @@
 # crds-graphql-api
 
-Central GraphQL service to consume and graph all data microservices. Built and deployed to Kubernetes via TeamCity.
+Central GraphQL service to consume and graph all data micro services. Built and deployed to Kubernetes via TeamCity.
 
 ## Quick Start
 It is recommended that you first become familiar with graphql theory and implementation here (https://www.apollographql.com/docs/). This project uses Apollo for creating the GraphQL server on top of Express. 
@@ -18,14 +18,14 @@ It is recommended that you first become familiar with graphql theory and impleme
                         name
                         }
                     }`
-9. You should see a list of sites with their id and name. If you recieve a "context creation failed" error message then your auth token was expired or invalid.         Double check the header you set.
+9. You should see a list of sites with their id and name. If you receive a "context creation failed" error message then your auth token was expired or invalid.         Double check the header you set.
 
 #### Deployment
-Deployment is automatic via Teamcity in development, release, and master branches. They live under API & Back-End > GraphQL-API and get deployed to Kubernetes (https://k8s-int.crossroads.net/#!/service/api/crds-graphql-api?namespace=api).
+Deployment is automatic via Team City in development, release, and master branches. They live under API & Back-End > GraphQL-API and get deployed to Kubernetes (https://k8s-int.crossroads.net/#!/service/api/crds-graphql-api?namespace=api).
 
 #### Logging
 We are logging for service analytics in new relic under graphql-api ${env}.
-We are also logging requests, reseponses and errors to logz.io. 
+We are also logging requests, responses and errors to logz.io. 
 
 #### Environment variables
 .envrc Sample: 

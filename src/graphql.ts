@@ -11,7 +11,6 @@ import { IUsersConnector } from "./graph/users/users.interface";
 import { ISitesConnector } from "./graph/sites/sites.interface";
 import { RedisCache } from "apollo-server-cache-redis";
 import responseCachePlugin from "apollo-server-plugin-response-cache";
-import { Vault } from "crds-vault-node";
 import { ILifeStageConnector } from "./graph/life-stages/life-stage.interface";
 import { Mongo } from "./sources/mongo";
 
