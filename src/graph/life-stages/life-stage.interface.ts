@@ -1,6 +1,6 @@
 export interface ILifeStageConnector {
   getLifeStages(): Promise<ILifeStage[]>
-  // getLifeStageContent(filter?: string): Promise<ILifeStageContent[]>
+  getLifeStageContent(filter?: string): Promise<ILifeStageContent[]>
 }
 
 export interface ILifeStage {
@@ -11,8 +11,9 @@ export interface ILifeStage {
 }
 
 export interface ILifeStageContent {
+  id: string
   title: string
-  description: string
+  contentType: string
   imageUrl: string
   slug: string
 }

@@ -9,9 +9,9 @@ const resolverMap: any = {
     lifeStages: (parent, args, { authData, dataSources }: IContext) => {
       return dataSources.lifeStageConnector.getLifeStages();
     },
-    // lifeStageContent: (parent, args, { authData, dataSources }: IContext) => {
-    //   return dataSources.lifeStageConnector.getLifeStageContent(args.filter);
-    // }
+    lifeStageContent: (parent, args, { authData, dataSources }: IContext) => {
+      return dataSources.lifeStageConnector.getLifeStageContent(args.filter);
+    }
   }
 }
 

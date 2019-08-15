@@ -26,21 +26,25 @@ export class LifeStageConnector implements ILifeStageConnector {
       })
   }
 
-  // public getLifeStageContent(id: string): Promise<ILifeStageContent[]> {
-  //   const client = createClient({
-  //     accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
-  //     space: process.env.CONTENTFUL_SPACE_ID,
-  //     environment: process.env.CONTENTFUL_ENV
-  //   });
+  public getLifeStageContent(id: string): Promise<ILifeStageContent[]> {
+    const client = createClient({
+      accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+      space: process.env.CONTENTFUL_SPACE_ID,
+      environment: process.env.CONTENTFUL_ENV
+    });
 
-  //   return client.getEntry(id)
-  //     .then((response: any) => {
-  //       console.log(response);
-  //       return response.fields.items.map((item: any) => {
-  //         return {
-  //           id: item.sys.id
-  //         }
-  //       })
-  //     })
-  // }
+    return client.getEntry(id)
+      .then((response: any) => {
+        console.log(response.fields.content);
+        return response.fields.content.map((item: any) => {
+          return {
+            id: item.sys.id,
+            title: item.fields.title,
+            slug: item.fields.slug,
+            imageUrl: item.fields.image.fields.file.url,
+            contentType: item.sys.contentType.sys.id
+          }
+        })
+      })
+  }
 }
