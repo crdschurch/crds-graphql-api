@@ -8,17 +8,21 @@ It is recommended that you first become familiar with graphql theory and impleme
 1. Clone the repo: `git clone https://github.com/crdschurch/crds-graphql-api`
 2. Get Vault and New Relic env vars
 3. Run `npm i` to add dependencies
-4. Run `npm run watch` to compile the ts to js in the `/dist` folder and watch for file updates.
-5. Launch the server locally by either launching via the debugger in VSCode against Node (preferred method because you get easy debugging and breakpoints in vs         code via the mapped /src/*.ts to /dist/*.js) or by running `npm run start`.
-6. You should now be able to visit localhost:8000/graphql and see the included UI for ApolloServer. 
-7. To execute any query or mutation you will need a valid Auth Token. To retrieve this you can login at int.crossroads.net and copy the value for the intsessionId      cookie in the browser. Paste your auth token as a header - found in the bottom left of the UI as a JSON object. `{"authorization": "${yourAuthTokenHere}"}. `
-8. Run a test query `{
+4. Run the server
+    - Option 1:
+      * Run `npm run watch` to compile the ts to js in the `/dist` folder and watch for file updates.
+      * Launch the server locally by either launching via the debugger in VSCode against Node (preferred method because you get easy debugging and breakpoints in vs         code via the mapped /src/*.ts to /dist/*.js) or by running `npm run start`.
+    - Option 2:
+      * Just use F5 in vscode to run. It will automatically build everytime you restart the server
+5. You should now be able to visit localhost:8000/graphql and see the included UI for ApolloServer. 
+6. To execute any query or mutation you will need a valid Auth Token. To retrieve this you can login at int.crossroads.net and copy the value for the intsessionId      cookie in the browser. Paste your auth token as a header - found in the bottom left of the UI as a JSON object. `{"authorization": "${yourAuthTokenHere}"}. `
+7. Run a test query `{
                      sites {
                         id
                         name
                         }
                     }`
-9. You should see a list of sites with their id and name. If you receive a "context creation failed" error message then your auth token was expired or invalid.         Double check the header you set.
+8. You should see a list of sites with their id and name. If you receive a "context creation failed" error message then your auth token was expired or invalid.         Double check the header you set.
 
 #### Deployment
 Deployment is automatic via Team City in development, release, and master branches. They live under API & Back-End > GraphQL-API and get deployed to Kubernetes (https://k8s-int.crossroads.net/#!/service/api/crds-graphql-api?namespace=api).
