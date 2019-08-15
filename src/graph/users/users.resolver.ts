@@ -21,7 +21,10 @@ export const UserResolver = {
       return dataSources.usersConnector.getCongregation(authData.HouseholdId);
     },
     groups: (user, args, { authData, dataSources }: IContext) => {
-      return dataSources.usersConnector.getGroups(authData.ParticipantId)
+      return dataSources.usersConnector.getGroups(authData.ParticipantId);
+    },
+    lifeStage:(user, args, { authData, dataSources }: IContext) => {
+      return dataSources.usersConnector.getLifeStage(authData.ParticipantId, dataSources.mongo);
     }
   }
 };

@@ -2,6 +2,8 @@ import { injectable } from "inversify";
 import { ISite } from "../sites/sites.interface";
 import { IGroup } from "../groups/groups.interface";
 import { IUsersConnector, IUser } from "./users.interface";
+import { Mongo } from '../../sources/mongo';
+import { ILifeStage } from "../life-stages/life-stage.interface";
 
 const MP = require("ministry-platform");
 
@@ -27,8 +29,8 @@ export class UsersConnector implements IUsersConnector {
             });
     }
 
-    public getGroups(ParticipantID: number): Promise<IGroup[]> {
-        const filter = `Group_Participants.[Participant_ID] = ${ParticipantID}`;
+    public getGroups(UserID: number): Promise<IGroup[]> {
+        const filter = `Group_Participants.[Participant_ID] = ${UserID}`;
         const table = "Group_Participants";
         const mp = new MP();
         return mp
@@ -69,5 +71,13 @@ export class UsersConnector implements IUsersConnector {
                     name: response.data[0].Congregation_Name
                 };
             })
+    }
+
+    public getLifeStage(UserID: number, Mongo: Mongo): Promise<ILifeStage> {
+        const db = Mongo.client.db('personalization');
+        const collection = db.collection('users');
+        return collection.findOne({ userId: UserID }, { lifeStage: true }).then((document) => {
+            return document.lifeStage
+        });
     }
 }
