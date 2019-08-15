@@ -1,30 +1,46 @@
 import { injectable } from "inversify";
-import { ISitesConnector } from "../sites/sites.interface";
-import { ILifeStageConnector, ILifeStage } from "./life-stage.interface";
+import { ILifeStageConnector, ILifeStage, ILifeStageContent } from "./life-stage.interface";
 import { createClient } from "contentful";
-
 
 @injectable()
 export class LifeStageConnector implements ILifeStageConnector {
 
-  public contentfulConfig = {
-    accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
-    space: process.env.CONTENTFUL_SPACE_ID,
-    environment: process.env.CONTENTFUL_ENV
-  }
+  public getLifeStages(): Promise<ILifeStage[]> {
+    const client = createClient({
+      accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+      space: process.env.CONTENTFUL_SPACE_ID,
+      environment: process.env.CONTENTFUL_ENV
+    });
 
-  public getLifeStages(filter?: string): Promise<ILifeStage[]> {
-    const client = createClient(this.contentfulConfig);
-
-    return client.getContentType('life_stage')
+    return client.getEntries({content_type: 'life_stage'})
       .then(response => {
-        return response.fields.map(fields => {
+        console.log(response);
+        return response.items.map((item: any) => {
           return {
-              title: 'title',
-              description: 'description',
-              imageUrl: 'imageUrl'
+            id: item.sys.id,
+            title: item.fields.title,
+            description: item.fields.description,
+            imageUrl: item.fields.image.fields.file.url
           }
-        })
+        });
       })
   }
+
+  // public getLifeStageContent(id: string): Promise<ILifeStageContent[]> {
+  //   const client = createClient({
+  //     accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+  //     space: process.env.CONTENTFUL_SPACE_ID,
+  //     environment: process.env.CONTENTFUL_ENV
+  //   });
+
+  //   return client.getEntry(id)
+  //     .then((response: any) => {
+  //       console.log(response);
+  //       return response.fields.items.map((item: any) => {
+  //         return {
+  //           id: item.sys.id
+  //         }
+  //       })
+  //     })
+  // }
 }

@@ -48,8 +48,8 @@ export class GraphqlServer {
                 return {
                     usersConnector: this.usersConnector,
                     sitesConnector: this.sitesConnector,
-                    lifeStageConnect: this.lifeStageConnector,
-                    mongo: this.mongo
+                    mongo: this.mongo,
+                    lifeStageConnector: this.lifeStageConnector
                 };
             },
             formatResponse: response => {
