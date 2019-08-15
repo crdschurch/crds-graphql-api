@@ -49,7 +49,7 @@ export class GraphqlServer {
                 return {
                     usersConnector: this.usersConnector,
                     sitesConnector: this.sitesConnector,
-                    lifeStageConnect: this.lifeStageConnector
+                    lifeStageConnector: this.lifeStageConnector
                 };
             },
             formatResponse: response => {
