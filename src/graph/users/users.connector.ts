@@ -78,6 +78,7 @@ export class UsersConnector implements IUsersConnector {
         const collection = db.collection('users');
         return collection.findOne({ userId: UserID }, { lifeStage: true })
             .then((document) => {
+                if (!document) return null;
                 return document.lifeStage
             });
     }
