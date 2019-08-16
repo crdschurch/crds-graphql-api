@@ -6,7 +6,7 @@ const resolverMap: any = {
       return dataSources.lifeStageConnector.getLifeStages();
     },
     lifeStageContent: (parent, args, { authData, dataSources }: IContext) => {
-      return dataSources.lifeStageConnector.getLifeStageContent(args.filter);
+      return dataSources.lifeStageConnector.getLifeStageContent(args.id);
     }
   }
 }

@@ -3,7 +3,7 @@ import { gql } from "apollo-server-express";
 export default gql`
   extend type Query {
     lifeStages: [LifeStage!]
-    lifeStageContent(filter: String): [LifeStageContent!]
+    lifeStageContent(id: String): [LifeStageContent!]
   }
 
   type LifeStage @cacheControl(scope: PUBLIC, maxAge: 10) {

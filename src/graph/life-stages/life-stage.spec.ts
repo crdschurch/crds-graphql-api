@@ -27,7 +27,7 @@ export class MocksLifeStageConnector implements ILifeStageConnector {
     });
   }
 
-  public getLifeStageContent(filter): Promise<ILifeStageContent[]> {
+  public getLifeStageContent(id): Promise<ILifeStageContent[]> {
     return new Promise((resolve, reject) => {
       resolve([
         {
