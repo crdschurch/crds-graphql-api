@@ -15,7 +15,8 @@ export class LifeStageConnector implements ILifeStageConnector {
             id: item.sys.id,
             title: item.fields.title,
             description: item.fields.description,
-            imageUrl: item.fields.image.fields.file.url
+            imageUrl: item.fields.image.fields.file.url,
+            contentTotal: item.fields.content.length
           }
         });
       })

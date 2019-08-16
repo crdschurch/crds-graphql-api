@@ -11,6 +11,7 @@ export default gql`
     title: String!
     description: String!
     imageUrl: String!
+    contentTotal: String!
   }
 
   input LifeStageInput {

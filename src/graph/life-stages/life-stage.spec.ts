@@ -15,13 +15,15 @@ export class MocksLifeStageConnector implements ILifeStageConnector {
           "title": "Married",
           "description": "Knot Tied",
           "imageUrl": "/your/image.jpg",
-          "id": "id1"
+          "id": "id1",
+          "contentTotal": "1"
         },
         {
           "title": "Divorced",
           "description": "Knot Untied?",
           "imageUrl": "/your/image2.jpg",
-          "id": "id2"
+          "id": "id2",
+          "contentTotal": "4"
         }
       ])
     });
@@ -65,6 +67,7 @@ it('fetches life stage data', async () => {
               title
               description
               imageUrl
+              contentTotal
           }
         }
         ` });
@@ -75,13 +78,15 @@ it('fetches life stage data', async () => {
         "title": "Married",
         "description": "Knot Tied",
         "imageUrl": "/your/image.jpg",
-        "id": "id1"
+        "id": "id1",
+        "contentTotal": "1"
       },
       {
         "title": "Divorced",
         "description": "Knot Untied?",
         "imageUrl": "/your/image2.jpg",
-        "id": "id2"
+        "id": "id2",
+        "contentTotal": "4"
       }
     ]
   });
@@ -98,7 +103,7 @@ it('fetches life stage content', async () => {
   const { query } = createTestClient(server);
   const res = await query({
     query: `{
-          lifeStageContent(filter: "CONTENTFUL_LIFE_STAGE_ID"){
+          lifeStageContent(id: "CONTENTFUL_LIFE_STAGE_ID"){
             id
             title
             imageUrl
