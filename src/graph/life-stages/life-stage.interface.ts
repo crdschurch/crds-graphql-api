@@ -6,8 +6,9 @@ export interface ILifeStageConnector {
 export interface ILifeStage {
   id: string
   title: string
-  description?: string
-  imageUrl?: string
+  description: string
+  imageUrl: string
+  contentTotal: string
 }
 
 export interface ILifeStageContent {
