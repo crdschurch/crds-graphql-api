@@ -8,6 +8,8 @@ import { AuthConnector } from "../graph/auth/auth.connector";
 import { SitesConnector } from "../graph/sites/sites.connector";
 import { LifeStageConnector } from "../graph/life-stages/life-stage.connector";
 import { Mongo } from "../sources/mongo";
+import { ContentfulService } from "../sources/contentful";
+
 
 var container = new Container();
 
@@ -26,5 +28,7 @@ container.bind<LifeStageConnector>(Types.LifeStageConnector)
     .to(LifeStageConnector);
 container.bind<Mongo>(Types.Mongo)
     .to(Mongo);
+container.bind<ContentfulService>(Types.ContentfulService)
+    .to(ContentfulService);
 
 export default container;

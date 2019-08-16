@@ -6,5 +6,6 @@ export const Types = {
     Server: Symbol("Server"),
     SitesConnector: Symbol("SitesConnector"),
     LifeStageConnector: Symbol("LifeStageConnector"),
-    Mongo: Symbol("Mongo")
+    Mongo: Symbol("Mongo"),
+    ContentfulService: Symbol("ContentfulService")
 };
