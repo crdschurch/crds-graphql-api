@@ -14,7 +14,7 @@ It is recommended that you first become familiar with graphql theory and impleme
       * Launch the server locally by either launching via the debugger in VSCode against Node (preferred method because you get easy debugging and breakpoints in vs         code via the mapped /src/*.ts to /dist/*.js) or by running `npm run start`.
     - Option 2:
       * Just use F5 in vscode to run. It will automatically build everytime you restart the server
-5. You should now be able to visit localhost:8000/graphql and see the included UI for ApolloServer. 
+5. You should now be able to visit localhost:8000 and see the included UI for ApolloServer. 
 6. To execute any query or mutation you will need a valid Auth Token. To retrieve this you can login at int.crossroads.net and copy the value for the intsessionId      cookie in the browser. Paste your auth token as a header - found in the bottom left of the UI as a JSON object. `{"authorization": "${yourAuthTokenHere}"}. `
 7. Run a test query `{
                      sites {

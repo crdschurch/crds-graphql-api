@@ -63,7 +63,7 @@ export class GraphqlServer {
             cache: new RedisCache(`redis://:${process.env.REDIS_PASSWORD}@${process.env.REDIS_HOST}/${process.env.REDIS_DB}`),
         });
 
-        server.applyMiddleware({ app, path: "/graphql" })
+        server.applyMiddleware({ app, path: "/" })
 
         app.listen({ port: 8000 }, () => { console.log('listening on 8000') });
     }
