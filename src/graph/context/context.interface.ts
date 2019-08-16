@@ -10,6 +10,5 @@ export interface IContext {
         usersConnector: IUsersConnector
         sitesConnector: ISitesConnector
         lifeStageConnector: ILifeStageConnector,
-        mongo: Mongo
     }
 }

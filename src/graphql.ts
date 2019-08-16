@@ -28,7 +28,6 @@ export class GraphqlServer {
         @inject(Types.UsersConnector) private usersConnector: IUsersConnector,
         @inject(Types.SitesConnector) private sitesConnector: ISitesConnector,
         @inject(Types.LifeStageConnector) private lifeStageConnector: ILifeStageConnector,
-        @inject(Types.Mongo) private mongo: Mongo
     ) { }
 
     public async start(): Promise<void> {
@@ -47,7 +46,6 @@ export class GraphqlServer {
                 return {
                     usersConnector: this.usersConnector,
                     sitesConnector: this.sitesConnector,
-                    mongo: this.mongo,
                     lifeStageConnector: this.lifeStageConnector
                 };
             },

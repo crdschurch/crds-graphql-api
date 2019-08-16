@@ -1,14 +1,18 @@
-import { injectable } from "inversify";
+import { injectable, inject } from "inversify";
 import { ISite } from "../sites/sites.interface";
 import { IGroup } from "../groups/groups.interface";
 import { IUsersConnector, IUser } from "./users.interface";
 import { Mongo } from '../../sources/mongo';
 import { ILifeStage } from "../life-stages/life-stage.interface";
+import { Types } from "../../ioc/types";
 
 const MP = require("ministry-platform");
 
 @injectable()
 export class UsersConnector implements IUsersConnector {
+
+    constructor(@inject(Types.Mongo) private mongo: Mongo) {}
+
     public getCongregation(HouseholdID: number): Promise<ISite> {
         const filter = `Households.[Household_ID] = ${HouseholdID}`;
         const table = "Households";
@@ -73,8 +77,8 @@ export class UsersConnector implements IUsersConnector {
             })
     }
 
-    public getLifeStage(UserID: number, Mongo: Mongo): Promise<ILifeStage> {
-        const db = Mongo.client.db('personalization');
+    public getLifeStage(UserID: number): Promise<ILifeStage> {
+        const db = this.mongo.client.db('personalization');
         const collection = db.collection('users');
         return collection.findOne({ userId: UserID }, { lifeStage: true })
             .then((document) => {
@@ -83,12 +87,12 @@ export class UsersConnector implements IUsersConnector {
             });
     }
 
-    public setLifeStage(UserID: number, lifeStage: ILifeStage, Mongo: Mongo): Promise<ILifeStage> {
-        const db = Mongo.client.db('personalization');
+    public setLifeStage(UserID: number, lifeStage: ILifeStage): Promise<ILifeStage> {
+        const db = this.mongo.client.db('personalization');
         const collection = db.collection('users');
         return collection.updateOne({ userId: UserID }, { $set: { lifeStage: lifeStage } }, { upsert: true })
             .then((document) => {
-                return this.getLifeStage(UserID, Mongo);
+                return this.getLifeStage(UserID);
             });
     }
 }

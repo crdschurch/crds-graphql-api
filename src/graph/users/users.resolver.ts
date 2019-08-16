@@ -12,7 +12,7 @@ export const UserResolver = {
       return dataSources.usersConnector.setCongregation(authData.HouseholdId, parseInt(args.siteId));
     },
     setLifeStage: (parent, args, { authData, dataSources }: IContext) => {
-      return dataSources.usersConnector.setLifeStage(authData.ContactId, args.lifeStage, dataSources.mongo);
+      return dataSources.usersConnector.setLifeStage(authData.ContactId, args.lifeStage);
     }
   },
 
@@ -24,7 +24,7 @@ export const UserResolver = {
       return dataSources.usersConnector.getGroups(authData.ContactId);
     },
     lifeStage: (user, args, { authData, dataSources }: IContext) => {
-      return dataSources.usersConnector.getLifeStage(authData.ContactId, dataSources.mongo);
+      return dataSources.usersConnector.getLifeStage(authData.ContactId);
     }
   }
 };

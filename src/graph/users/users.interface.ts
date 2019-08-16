@@ -7,8 +7,8 @@ export interface IUsersConnector {
     getCongregation(HouseholdID: number): Promise<ISite>
     getGroups(UserID: number): Promise<IGroup[]>
     setCongregation(HouseholdID: number, SiteID: number): Promise<ISite>
-    getLifeStage(UserID: number, Mongo: Mongo): Promise<ILifeStage>
-    setLifeStage(UserID: number, lifeStage: ILifeStage, Mongo: Mongo):  Promise<ILifeStage>
+    getLifeStage(UserID: number): Promise<ILifeStage>
+    setLifeStage(UserID: number, lifeStage: ILifeStage):  Promise<ILifeStage>
 }
 
 export interface IUser {
