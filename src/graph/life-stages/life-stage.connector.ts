@@ -1,18 +1,14 @@
-import { injectable } from "inversify";
+import { injectable, inject } from "inversify";
 import { ILifeStageConnector, ILifeStage, ILifeStageContent } from "./life-stage.interface";
-import { createClient } from "contentful";
+import { ContentfulService } from "../../sources/contentful";
+import { Types } from "../../ioc/types";
 
 @injectable()
 export class LifeStageConnector implements ILifeStageConnector {
-
-  private client = createClient({
-    accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
-    space: process.env.CONTENTFUL_SPACE_ID,
-    environment: process.env.CONTENTFUL_ENV
-  });
+  constructor(@inject(Types.ContentfulService) private contentfulService: ContentfulService){}
 
   public getLifeStages(): Promise<ILifeStage[]> {
-    return this.client.getEntries({ content_type: 'life_stage' })
+    return this.contentfulService.client.getEntries({ content_type: 'life_stage' })
       .then(response => {
         return response.items.map((item: any) => {
           return {
@@ -26,7 +22,7 @@ export class LifeStageConnector implements ILifeStageConnector {
   }
 
   public getLifeStageContent(id: string): Promise<ILifeStageContent[]> {
-    return this.client.getEntry(id)
+    return this.contentfulService.client.getEntry(id)
       .then((response: any) => {
         return response.fields.content.map((item: any) => {
           return {
