@@ -17,4 +17,7 @@ export interface ILifeStageContent {
   contentType: string
   imageUrl: string
   slug: string
+  duration?: number
+  authors?: string[]
+  category?: string
 }

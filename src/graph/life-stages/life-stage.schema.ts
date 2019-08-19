@@ -25,5 +25,8 @@ export default gql`
     slug: String!
     imageUrl: String!
     contentType: String!
+    duration: Int
+    authors: [String!]
+    category: String
   }
 `;

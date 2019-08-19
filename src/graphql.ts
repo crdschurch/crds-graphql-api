@@ -31,7 +31,7 @@ export class GraphqlServer {
     ) { }
 
     public async start(): Promise<void> {
-        
+
         let app = this.app;
         logging.init();
 
@@ -39,8 +39,11 @@ export class GraphqlServer {
             typeDefs: schema,
             resolvers,
             context: ({ req }) => {
-                const token = req.headers.authorization || ""
-                return this.authConnector.authenticate(token);
+                const token = req.headers.authorization || "";
+                return this.authConnector.authenticate(token).then((user) => {
+                    if (!user) throw new Error('Not Authenticated.');
+                    return user;
+                });
             },
             dataSources: (): any => {
                 return {

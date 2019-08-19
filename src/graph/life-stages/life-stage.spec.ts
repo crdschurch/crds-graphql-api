@@ -37,14 +37,21 @@ export class MocksLifeStageConnector implements ILifeStageConnector {
           "contentType": "contentType1",
           "imageUrl": "/your/image1.jpg",
           "slug": "slug1",
-          "title": "title1"
+          "title": "title1",
+          "duration": 1234,
+          "authors": ["author1"],
+          "category": "category1"
+          
         },
         {
           "id": "id2",
           "contentType": "contentType2",
           "imageUrl": "/your/image2.jpg",
           "slug": "slug2",
-          "title": "title2"
+          "title": "title2",
+          "duration": 5678,
+          "authors": ["author2"],
+          "category": "category2"
         }
       ])
     });
@@ -120,14 +127,20 @@ it('fetches life stage content', async () => {
         "contentType": "contentType1",
         "imageUrl": "/your/image1.jpg",
         "slug": "slug1",
-        "title": "title1"
+        "title": "title1",
+        "duration": 1234,
+        "authors": ["author1"],
+        "category": "category1"
       },
       {
         "id": "id2",
         "contentType": "contentType2",
         "imageUrl": "/your/image2.jpg",
         "slug": "slug2",
-        "title": "title2"
+        "title": "title2",
+        "duration": 5678,
+        "authors": ["author2"],
+        "category": "category2"
       }
     ]
   });
