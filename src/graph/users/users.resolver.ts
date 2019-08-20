@@ -15,7 +15,7 @@ export const UserResolver = {
       try {
         dataSources.analytics.client.track({
           userId: authData.ContactId,
-          event: 'user changed life-stage',
+          event: 'LifeStageUpdated',
           properties: args
         });
       } catch (err) {
