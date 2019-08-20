@@ -9,7 +9,8 @@ import { SitesConnector } from "../graph/sites/sites.connector";
 import { LifeStageConnector } from "../graph/life-stages/life-stage.connector";
 import { Mongo } from "../sources/mongo";
 import { ContentfulService } from "../sources/contentful";
-
+import { Analytics } from "../config/analytics";
+import { Logger } from "../config/logging";
 
 var container = new Container();
 
@@ -30,5 +31,9 @@ container.bind<Mongo>(Types.Mongo)
     .to(Mongo);
 container.bind<ContentfulService>(Types.ContentfulService)
     .to(ContentfulService);
+container.bind<Analytics>(Types.Analytics)
+    .to(Analytics);
+container.bind<Logger>(Types.Logger)
+    .to(Logger);
 
 export default container;

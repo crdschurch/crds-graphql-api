@@ -2,6 +2,7 @@ import { ISite } from "../sites/sites.interface";
 import { IGroup } from "../groups/groups.interface";
 import { ILifeStage } from "../life-stages/life-stage.interface";
 import { Mongo } from "../../sources/mongo";
+import { DataSource } from "apollo-datasource";
 
 export interface IUsersConnector {
     getCongregation(HouseholdID: number): Promise<ISite>
