@@ -16,7 +16,7 @@ export default gql`
 
   input LifeStageInput {
     id: String!
-    title: String!
+    title: String
   }
 
   type LifeStageContent @cacheControl(scope: PUBLIC, maxAge: 10) {
