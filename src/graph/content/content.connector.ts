@@ -21,7 +21,7 @@ export class ContentConnector implements IContentConnector {
         });
     }
 
-    private getNextEntries(filters, entries, skip) {
+    private getNextEntries(filters, entries, skip): Promise<any> {
         var params = {
             skip: skip,
             limit: 1000,
@@ -38,7 +38,7 @@ export class ContentConnector implements IContentConnector {
             }).catch((ex) => { throw ex; })
     }
 
-    private getContent(filters) {
+    public getContent(filters): Promise<any> {
         return this.getNextEntries(filters, [], 0);
     }
 }

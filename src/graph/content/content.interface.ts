@@ -14,4 +14,5 @@ export interface IContent {
 
 export interface IContentConnector {
     getSeriesDataForMessages(item): Promise<Series>
+    getContent(filters: any): Promise<any> 
 }
