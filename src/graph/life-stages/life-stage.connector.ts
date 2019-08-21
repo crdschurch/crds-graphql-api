@@ -27,7 +27,7 @@ export class LifeStageConnector implements ILifeStageConnector {
   }
 
   public getLifeStageContent(id: string): Promise<IContent[]> {
-    return this.getContent({ 'sys.id': id, include: 2 })
+    return this.getContent({'sys.id': id, include: 2 })
       .then((items: any) => {
         let content = items[0].fields.content;
         return content.map((item: any) => ContentFactory.instantiate(item))

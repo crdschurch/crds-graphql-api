@@ -3,12 +3,12 @@ import { gql } from "apollo-server-express";
 export default gql`
   extend type Query {
     lifeStages: [LifeStage!]
-    lifeStageContent(id: String): [LifeStageContent!]
+    lifeStageContent(id: String): [Content!]
   }
 
   type LifeStage @cacheControl(scope: PUBLIC, maxAge: 10) {
     id: String!
-    title: String!
+    title: String
     description: String
     imageUrl: String!
     contentTotal: String!
@@ -17,25 +17,5 @@ export default gql`
   input LifeStageInput {
     id: String!
     title: String
-  }
-
-  type LifeStageContent @cacheControl(scope: PUBLIC, maxAge: 10) {
-    id: String!
-    title: String
-    contentType: String!
-    duration: String
-    authors: [Author!]
-    category: String,
-    slug: String,
-    references: References
-  }
-
-  type Author {
-    fullName: String
-  }
-
-  type References {
-    qualifiedUrl: String!
-    imageUrl: String!
   }
 `;
