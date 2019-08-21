@@ -35,9 +35,11 @@
     "inversify": "^5.0.1",
     "logzio-nodejs": "^1.0.6",
     "ministry-platform": "^1.0.0",
+    "moment": "^2.24.0",
     "mongodb": "^3.3.0",
     "newrelic": "^5.10.0",
     "reflect-metadata": "^0.1.13",
+    "remove-markdown": "^0.3.0",
     "rxjs": "^6.5.2",
     "typescript": "^3.5.3"
   },
