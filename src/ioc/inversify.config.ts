@@ -8,7 +8,7 @@ import { AuthConnector } from "../graph/auth/auth.connector";
 import { SitesConnector } from "../graph/sites/sites.connector";
 import { LifeStageConnector } from "../graph/life-stages/life-stage.connector";
 import { Mongo } from "../sources/mongo";
-import { ContentfulService } from "../sources/contentful";
+import { ContentService } from "../sources/content";
 import { Analytics } from "../config/analytics";
 import { Logger } from "../config/logging";
 import { ContentConnector } from "../graph/content/content.connector";
@@ -32,8 +32,8 @@ container.bind<ContentConnector>(Types.ContentConnector)
     .to(ContentConnector);
 container.bind<Mongo>(Types.Mongo)
     .to(Mongo);
-container.bind<ContentfulService>(Types.ContentfulService)
-    .to(ContentfulService);
+container.bind<ContentService>(Types.ContentService)
+    .to(ContentService);
 container.bind<Analytics>(Types.Analytics)
     .to(Analytics);
 container.bind<Logger>(Types.Logger)

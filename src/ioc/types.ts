@@ -7,8 +7,8 @@ export const Types = {
     SitesConnector: Symbol("SitesConnector"),
     LifeStageConnector: Symbol("LifeStageConnector"),
     Mongo: Symbol("Mongo"),
-    ContentfulService: Symbol("ContentfulService"),
     Analytics: Symbol("Analytics"),
     Logger: Symbol("Logger"),
-    ContentConnector: Symbol("ContentConnector")
+    ContentConnector: Symbol("ContentConnector"),
+    ContentService: Symbol("ContentService")
 };

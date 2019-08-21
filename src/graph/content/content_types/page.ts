@@ -6,7 +6,7 @@ export default class Page extends Content {
     super(entry);
 
     var fields = entry.fields;
-    this.image = fields.meta && fields.meta.fields.image ? ContentUtils.getImgixURL(fields.meta.fields.image.fields.file.url) : this.image;
+    this.imageUrl = fields.meta && fields.meta.fields.image ? ContentUtils.getImgixURL(fields.meta.fields.image.fields.file.url) : this.imageUrl;
     this.description = fields.body;
     this.slug = fields.permalink;
   }

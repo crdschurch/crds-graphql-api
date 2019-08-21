@@ -12,7 +12,7 @@ export default class Content implements IContent {
     public interaction_count: number;
     public objectID: string;
     public id: string;
-    public image: string;
+    public imageUrl: string;
 
     constructor(entry) {
         var fields = entry.fields;
@@ -21,7 +21,7 @@ export default class Content implements IContent {
         this.category = fields.category ? fields.category.fields.title : null;
         this.tags = fields.tags ? fields.tags.map(t => t.fields ? t.fields.title : null) : null;
         this.description = fields.description;
-        this.image = fields.image && fields.image.fields ? ContentUtils.getImgixURL(fields.image.fields.file.url) : null;
+        this.imageUrl = fields.image && fields.image.fields ? ContentUtils.getImgixURL(fields.image.fields.file.url) : null;
         this.interaction_count = fields.interaction_count;
         this.objectID = entry.sys.id;
         this.id = entry.sys.id;

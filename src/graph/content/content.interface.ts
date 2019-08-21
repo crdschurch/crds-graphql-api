@@ -9,10 +9,14 @@ export interface IContent {
     slug: string
     interaction_count: number
     id: string
+    imageUrl: string
     getQualifiedUrl(): Promise<string>
 }
 
 export interface IContentConnector {
     getSeriesDataForMessages(item): Promise<Series>
-    getContent(filters: any): Promise<any> 
+}
+
+export interface IContentService {
+    getContent(filters: any): Promise<any>
 }

@@ -22,8 +22,8 @@ export default gql`
     authors: [Author!]
     category: String,
     slug: String,
-    qualifiedUrl: String,
-    imageUrl: String
+    imageUrl: String,
+    qualifiedUrl: String
   }
 
   input LifeStageInput {

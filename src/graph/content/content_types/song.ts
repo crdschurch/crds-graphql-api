@@ -17,7 +17,7 @@ export default class Song extends Content {
         this.album = new Album(fields.album);
 
         const image = fields.bg_image && fields.bg_image.fields ? ContentUtils.getImgixURL(fields.bg_image.fields.file.url) : null;
-        this.image = image || this.album.image
+        this.imageUrl = image || this.album.imageUrl
     }
 
     public getQualifiedUrl(): Promise<string> {
