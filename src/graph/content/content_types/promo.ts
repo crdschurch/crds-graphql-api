@@ -1,6 +1,5 @@
 import Content from "./content.base";
 import { ContentUtils } from "../content_utils";
-import { IContentReferences } from "../content.interface";
 
 export default class Promo extends Content {
   public date: string;
@@ -14,11 +13,9 @@ export default class Promo extends Content {
     this.description = ContentUtils.removeMarkdown(fields.description);
   }
 
-  public getReferences(): Promise<IContentReferences> {
-    this.references.imageUrl = this.image;
-    this.references.qualifiedUrl = this.slug;
+  public getQualifiedUrl(): Promise<string> {
     return new Promise((resolve, reject) => {
-      resolve(this.references);
+      resolve(this.slug);
     });
   }
 }

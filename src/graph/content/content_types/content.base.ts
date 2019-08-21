@@ -1,4 +1,4 @@
-import { IContent, IContentReferences } from "../content.interface";
+import { IContent } from "../content.interface";
 import { ContentUtils } from "../content_utils";
 
 export default class Content implements IContent {
@@ -12,7 +12,6 @@ export default class Content implements IContent {
     public interaction_count: number;
     public objectID: string;
     public id: string;
-    public references: IContentReferences;
     public image: string;
 
     constructor(entry) {
@@ -27,18 +26,11 @@ export default class Content implements IContent {
         this.objectID = entry.sys.id;
         this.id = entry.sys.id;
         this.slug = fields.slug;
-
-        this.references = {
-            imageUrl: null,
-            qualifiedUrl: null
-        };
     }
 
-    public getReferences(): Promise<IContentReferences> {
-        this.references.imageUrl = this.image;
-        this.references.qualifiedUrl = `${process.env.CRDS_MEDIA_ENDPOINT}/${this.contentType}s/${this.slug}`;
+    public getQualifiedUrl(): Promise<string> {
         return new Promise((resolve, reject) => {
-            resolve(this.references);
+            resolve(`${process.env.CRDS_MEDIA_ENDPOINT}/${this.contentType}s/${this.slug}`);
         });
     }
 }

@@ -1,6 +1,5 @@
 import Content from "./content.base";
 import { ContentUtils } from "../content_utils";
-import { IContentReferences } from "../content.interface";
 
 export default class Series extends Content {
     public start_date: string;
@@ -17,11 +16,9 @@ export default class Series extends Content {
         this.interaction_count = fields.interaction_count;
     }
 
-    public getReferences(): Promise<IContentReferences> {
-        this.references.imageUrl = this.image;
-        this.references.qualifiedUrl = `${process.env.CRDS_MEDIA_ENDPOINT}/${this.contentType}/${this.slug}`;
+    public getQualifiedUrl(): Promise<string> {
         return new Promise((resolve, reject) => {
-            resolve(this.references);
+            resolve(`${process.env.CRDS_MEDIA_ENDPOINT}/${this.contentType}/${this.slug}`);
         });
     }
 }

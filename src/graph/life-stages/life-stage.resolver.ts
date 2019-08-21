@@ -1,4 +1,5 @@
 import { IContext } from "../context/context.interface";
+import { IContent } from "../content/content.interface";
 
 const resolverMap: any = {
   Query: {
@@ -10,9 +11,9 @@ const resolverMap: any = {
     }
   },
   LifeStageContent: {
-    references: (parent, args, { authData, dataSources }: IContext) => {
-      return dataSources.contentConnector.getReferencedContent(parent);
-    }
+    qualifiedUrl: (parent: IContent, args, { authData, dataSources }: IContext) => {
+      return parent.getQualifiedUrl();
+    },
   }
 };
 

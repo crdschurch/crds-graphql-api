@@ -2,7 +2,7 @@ import { injectable, inject } from "inversify";
 import { ILifeStageConnector, ILifeStage } from "./life-stage.interface";
 import { ContentfulService } from "../../sources/contentful";
 import { Types } from "../../ioc/types";
-import { IContent, IContentReferences } from "../content/content.interface";
+import { IContent } from "../content/content.interface";
 import Series from "../content/content_types/series";
 import { ContentFactory } from "../content/content.factory";
 

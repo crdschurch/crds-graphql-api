@@ -9,16 +9,9 @@ export interface IContent {
     slug: string
     interaction_count: number
     id: string
-    references: IContentReferences
-    getReferences(): Promise<IContentReferences>;
-}
-
-export interface IContentReferences {
-    imageUrl: string
-    qualifiedUrl: string
+    getQualifiedUrl(): Promise<string>
 }
 
 export interface IContentConnector {
-    getReferencedContent(content: IContent): Promise<IContentReferences>
     getSeriesDataForMessages(item): Promise<Series>
 }

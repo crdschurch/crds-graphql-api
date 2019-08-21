@@ -1,7 +1,6 @@
 import { ContentUtils } from "../content_utils";
 import Content from "./content.base";
 import Podcast from "./podcast";
-import { IContentReferences } from "../content.interface";
 
 export default class Episode extends Content {
     public duration: string;
@@ -19,11 +18,9 @@ export default class Episode extends Content {
         this.podcast = new Podcast(fields.podcast);
     }
 
-    public getReferences(): Promise<IContentReferences> {
-        this.references.imageUrl = this.podcast.image;
-        this.references.qualifiedUrl = `${process.env.CRDS_MEDIA_ENDPOINT}/podcasts/${this.podcast.slug}/${this.slug}`;
+    public getQualifiedUrl(): Promise<string> {
         return new Promise((resolve, reject) => {
-            resolve(this.references);
+            resolve(`${process.env.CRDS_MEDIA_ENDPOINT}/podcasts/${this.podcast.slug}/${this.slug}`);
         });
     }
 }

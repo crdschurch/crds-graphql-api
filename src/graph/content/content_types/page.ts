@@ -1,6 +1,5 @@
 import { ContentUtils } from "../content_utils";
 import Content from "./content.base";
-import { IContentReferences } from "../content.interface";
 
 export default class Page extends Content {
   constructor(entry) {
@@ -12,11 +11,9 @@ export default class Page extends Content {
     this.slug = fields.permalink;
   }
 
-  public getReferences(): Promise<IContentReferences> {
-    this.references.imageUrl = this.image;
-    this.references.qualifiedUrl = `${process.env.CRDS_APP_CLIENT_ENDPOINT}${this.slug}`;
+  public getQualifiedUrl(): Promise<string> {
     return new Promise((resolve, reject) => {
-      resolve(this.references);
+      resolve(`${process.env.CRDS_APP_CLIENT_ENDPOINT}${this.slug}`);
     });
   }
 }
