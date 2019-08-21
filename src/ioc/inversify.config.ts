@@ -11,6 +11,7 @@ import { Mongo } from "../sources/mongo";
 import { ContentfulService } from "../sources/contentful";
 import { Analytics } from "../config/analytics";
 import { Logger } from "../config/logging";
+import { ContentConnector } from "../graph/content/content.connector";
 
 var container = new Container();
 
@@ -27,6 +28,8 @@ container.bind<SitesConnector>(Types.SitesConnector)
     .to(SitesConnector);
 container.bind<LifeStageConnector>(Types.LifeStageConnector)
     .to(LifeStageConnector);
+container.bind<ContentConnector>(Types.ContentConnector)
+    .to(ContentConnector);
 container.bind<Mongo>(Types.Mongo)
     .to(Mongo);
 container.bind<ContentfulService>(Types.ContentfulService)

@@ -4,7 +4,7 @@ import { IContentReferences } from "../content.interface";
 import { Types } from "../../../ioc/types";
 import Series from "./series";
 import container from "../../../ioc/inversify.config";
-import { LifeStageConnector } from "../../life-stages/life-stage.connector";
+import { ContentConnector } from "../content.connector";
 
 export default class Message extends Content {
     public duration: string;
@@ -19,7 +19,7 @@ export default class Message extends Content {
     }
 
     public getReferences(): Promise<IContentReferences> {
-        return container.get<LifeStageConnector>(Types.LifeStageConnector)
+        return container.get<ContentConnector>(Types.ContentConnector)
             .getSeriesDataForMessages(this)
             .then((series: Series) => {
                 this.references.imageUrl = this.image;

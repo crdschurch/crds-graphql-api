@@ -1,3 +1,5 @@
+import Series from "./content_types/series";
+
 export interface IContent {
     title: string
     contentType: string
@@ -14,4 +16,9 @@ export interface IContent {
 export interface IContentReferences {
     imageUrl: string
     qualifiedUrl: string
+}
+
+export interface IContentConnector {
+    getReferencedContent(content: IContent): Promise<IContentReferences>
+    getSeriesDataForMessages(item): Promise<Series>
 }

@@ -9,5 +9,6 @@ export const Types = {
     Mongo: Symbol("Mongo"),
     ContentfulService: Symbol("ContentfulService"),
     Analytics: Symbol("Analytics"),
-    Logger: Symbol("Logger")
+    Logger: Symbol("Logger"),
+    ContentConnector: Symbol("ContentConnector")
 };

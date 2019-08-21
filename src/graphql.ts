@@ -13,6 +13,7 @@ import responseCachePlugin from "apollo-server-plugin-response-cache";
 import { ILifeStageConnector } from "./graph/life-stages/life-stage.interface";
 import { Analytics } from "./config/analytics";
 import { Logger } from "./config/logging";
+import { IContentConnector } from "./graph/content/content.interface";
 
 @injectable()
 export class GraphqlServer {
@@ -28,6 +29,7 @@ export class GraphqlServer {
         @inject(Types.UsersConnector) private usersConnector: IUsersConnector,
         @inject(Types.SitesConnector) private sitesConnector: ISitesConnector,
         @inject(Types.LifeStageConnector) private lifeStageConnector: ILifeStageConnector,
+        @inject(Types.ContentConnector) private contentConnector: IContentConnector,
         @inject(Types.Analytics) private analytics: Analytics,
         @inject(Types.Logger) private logger: Logger
     ) { }
@@ -51,6 +53,7 @@ export class GraphqlServer {
                     usersConnector: this.usersConnector,
                     sitesConnector: this.sitesConnector,
                     lifeStageConnector: this.lifeStageConnector,
+                    contentConnector: this.contentConnector,
                     analytics: this.analytics,
                     logger: this.logger
                 };
