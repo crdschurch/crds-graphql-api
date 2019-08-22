@@ -18,7 +18,7 @@ export class ContentService implements IContentService {
     var params = {
       skip: skip,
       limit: 1000,
-      include: 2
+      include: 10
     };
 
     Object.assign(params, filters);
