@@ -1,7 +1,7 @@
 import { injectable, inject } from "inversify";
 import { ILifeStageConnector, ILifeStage } from "./life-stage.interface";
 import { Types } from "../../ioc/types";
-import { IContent, IContentConnector, IContentService } from "../content/content.interface";
+import { IContent, IContentService } from "../content/content.interface";
 import { ContentFactory } from "../content/content.factory";
 
 @injectable()

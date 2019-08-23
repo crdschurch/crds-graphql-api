@@ -1,7 +1,7 @@
 import { injectable, inject } from "inversify";
 import { ISite } from "../sites/sites.interface";
 import { IGroup } from "../groups/groups.interface";
-import { IUsersConnector, IUser } from "./users.interface";
+import { IUsersConnector } from "./users.interface";
 import { Mongo } from '../../sources/mongo';
 import { ILifeStage } from "../life-stages/life-stage.interface";
 import { Types } from "../../ioc/types";
