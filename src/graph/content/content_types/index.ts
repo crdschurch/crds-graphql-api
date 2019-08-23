@@ -1,20 +1,21 @@
-import Album from './album';
-import Article from './article';
-import Author from './author';
-import Category from './category';
-import Episode from './episode';
-import Location from './location';
-import Message from './message';
-import Page from './page';
-import Perspective from './perspective';
-import Podcast from './podcast';
-import Promo from './promo';
-import Series from './series';
-import Song from './song';
-import Video from './video';
+import Album from './album/album';
+import Article from './article/article';
+import Author from './author/author';
+import Category from './category/category';
+import Episode from './episode/episode';
+import Location from './location/location';
+import Message from './message/message';
+import Page from './page/page';
+import Perspective from './perspective/perspective';
+import Podcast from './podcast/podcast';
+import Promo from './promo/promo';
+import Series from './series/series';
+import Song from './song/song';
+import Video from './video/video';
+import LifeStage from './life-stage/life-stage';
 
 export {
-    Album
+      Album
     , Article
     , Author
     , Category
@@ -28,4 +29,5 @@ export {
     , Series
     , Song
     , Video
+    , LifeStage
 }

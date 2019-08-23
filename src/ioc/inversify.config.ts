@@ -6,7 +6,7 @@ import { Server } from "../server";
 import { Types } from "./types";
 import { AuthConnector } from "../graph/auth/auth.connector";
 import { SitesConnector } from "../graph/sites/sites.connector";
-import { LifeStageConnector } from "../graph/life-stages/life-stage.connector";
+import { LifeStageConnector } from "../graph/content/content_types/life-stage/life-stage.connector";
 import { Mongo } from "../sources/mongo";
 import { ContentService } from "../sources/content";
 import { Analytics } from "../config/analytics";

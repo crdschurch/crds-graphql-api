@@ -1,5 +1,5 @@
-import { ContentUtils } from "../content_utils";
-import Content from "./content.base";
+import { ContentUtils } from "../../content_utils";
+import Content from "../../content.base";
 
 export default class Page extends Content {
   constructor(entry) {
