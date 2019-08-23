@@ -42,6 +42,7 @@ export class GraphqlServer {
             typeDefs: schema,
             resolvers,
             context: ({ req }) => {
+                if (!Object.keys(req.query).length) return;
                 const token = req.headers.authorization || "";
                 return this.authConnector.authenticate(token).then((user) => {
                     if (!user) throw new Error('Not Authenticated.');
