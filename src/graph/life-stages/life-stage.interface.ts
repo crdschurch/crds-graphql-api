@@ -1,6 +1,9 @@
+import { IContent } from "../content/content.interface";
+import Series from "../content/content_types/series";
+
 export interface ILifeStageConnector {
   getLifeStages(): Promise<ILifeStage[]>
-  getLifeStageContent(id: string): Promise<ILifeStageContent[]>
+  getLifeStageContent(id: string): Promise<IContent[]>
 }
 
 export interface ILifeStage {
@@ -9,15 +12,4 @@ export interface ILifeStage {
   description: string
   imageUrl: string
   contentTotal: string
-}
-
-export interface ILifeStageContent {
-  id: string
-  title: string
-  contentType: string
-  imageUrl: string
-  slug: string
-  duration?: number
-  authors?: string[]
-  category?: string
 }

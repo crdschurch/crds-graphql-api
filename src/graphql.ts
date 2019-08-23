@@ -6,12 +6,17 @@ import { Types } from "./ioc/types";
 import schema from "./schema";
 import resolvers from "./resolvers";
 import { IAuthConnector } from "./graph/auth/auth.interface";
-import * as logging from "./config/logging";
 import { IUsersConnector } from "./graph/users/users.interface";
 import { ISitesConnector } from "./graph/sites/sites.interface";
 import { RedisCache } from "apollo-server-cache-redis";
 import responseCachePlugin from "apollo-server-plugin-response-cache";
 import { ILifeStageConnector } from "./graph/life-stages/life-stage.interface";
+<<<<<<< HEAD
+=======
+import { Analytics } from "./config/analytics";
+import { Logger } from "./config/logging";
+import { IContentConnector } from "./graph/content/content.interface";
+>>>>>>> development
 
 @injectable()
 export class GraphqlServer {
@@ -26,18 +31,25 @@ export class GraphqlServer {
         @inject(Types.AuthConnector) private authConnector: IAuthConnector,
         @inject(Types.UsersConnector) private usersConnector: IUsersConnector,
         @inject(Types.SitesConnector) private sitesConnector: ISitesConnector,
+<<<<<<< HEAD
         @inject(Types.LifeStageConnector) private lifeStageConnector: ILifeStageConnector
+=======
+        @inject(Types.LifeStageConnector) private lifeStageConnector: ILifeStageConnector,
+        @inject(Types.ContentConnector) private contentConnector: IContentConnector,
+        @inject(Types.Analytics) private analytics: Analytics,
+        @inject(Types.Logger) private logger: Logger
+>>>>>>> development
     ) { }
 
     public async start(): Promise<void> {
 
         let app = this.app;
-        logging.init();
 
         const server = new ApolloServer({
             typeDefs: schema,
             resolvers,
             context: ({ req }) => {
+                if (req.body.query.includes('IntrospectionQuery')) return;
                 const token = req.headers.authorization || "";
                 return this.authConnector.authenticate(token).then((user) => {
                     if (!user) throw new Error('Not Authenticated.');
@@ -48,15 +60,18 @@ export class GraphqlServer {
                 return {
                     usersConnector: this.usersConnector,
                     sitesConnector: this.sitesConnector,
-                    lifeStageConnector: this.lifeStageConnector
+                    lifeStageConnector: this.lifeStageConnector,
+                    contentConnector: this.contentConnector,
+                    analytics: this.analytics,
+                    logger: this.logger
                 };
             },
             formatResponse: response => {
-                logging.logResponseBody(response);
+                this.logger.logResponseBody(response);
                 return response;
             },
             formatError: error => {
-                logging.logError(error);
+                this.logger.logError(error);
                 return error;
             },
             plugins: [responseCachePlugin({

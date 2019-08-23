@@ -88,7 +88,7 @@ export class UsersConnector implements IUsersConnector {
             });
     }
 
-    public setLifeStage(UserID: number, lifeStage: ILifeStage): Promise<ILifeStage> {
+    public setLifeStage(UserID: number, lifeStage?: ILifeStage): Promise<ILifeStage> {
         const db = this.mongo.client.db('personalization');
         const collection = db.collection('users');
         return collection.updateOne({ userId: UserID }, { $set: { lifeStage: lifeStage } }, { upsert: true })

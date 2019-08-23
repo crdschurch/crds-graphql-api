@@ -1,16 +1,20 @@
 import { injectable, inject } from "inversify";
-import { ILifeStageConnector, ILifeStage, ILifeStageContent } from "./life-stage.interface";
-import { ContentfulService } from "../../sources/contentful";
+import { ILifeStageConnector, ILifeStage } from "./life-stage.interface";
 import { Types } from "../../ioc/types";
+import { IContent, IContentConnector, IContentService } from "../content/content.interface";
+import { ContentFactory } from "../content/content.factory";
 
 @injectable()
 export class LifeStageConnector implements ILifeStageConnector {
-  constructor(@inject(Types.ContentfulService) private contentfulService: ContentfulService) { }
+
+  constructor(
+    @inject(Types.ContentService) private contentService: IContentService
+    ) { }
 
   public getLifeStages(): Promise<ILifeStage[]> {
-    return this.contentfulService.client.getEntries({ content_type: 'life_stage' })
-      .then(response => {
-        return response.items.map((item: any) => {
+    return this.contentService.getContent({ content_type: 'life_stage' })
+      .then(items => {
+        return items.map((item: any) => {
           return {
             id: item.sys.id,
             title: item.fields.title,
@@ -22,21 +26,11 @@ export class LifeStageConnector implements ILifeStageConnector {
       })
   }
 
-  public getLifeStageContent(id: string): Promise<ILifeStageContent[]> {
-    return this.contentfulService.client.getEntries({'sys.id': id, include: 2})
-      .then((response: any) => {
-        return response.items[0].fields.content.map((item: any) => {
-          return {
-            id: item.sys.id,
-            title: item.fields.title,
-            slug: item.fields.slug,
-            imageUrl: item.fields.image.fields.file.url,
-            contentType: item.sys.contentType.sys.id,
-            duration: item.fields.duration,
-            author: (item.fields.author && ((item.fields.author.fields && [item.fields.author.fields.full_name]) || item.fields.author.map(a => a.fields.full_name))) || [],
-            category: (item.fields.category && item.fields.category.fields.title)
-          }
-        })
+  public getLifeStageContent(id: string): Promise<IContent[]> {
+    return this.contentService.getContent({ 'sys.id': id })
+      .then((items: any) => {
+        let content = items[0].fields.content;
+        return content.map((item: any) => ContentFactory.instantiate(item))
       })
   }
 }
