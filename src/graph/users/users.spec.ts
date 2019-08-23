@@ -3,12 +3,13 @@ import { ApolloServer, ValidationError } from 'apollo-server-express';
 import schema from '../../schema';
 import resolvers from '../../resolvers';
 import { injectable } from 'inversify';
-import { IUsersConnector } from './users.interface';
+import { IUsersConnector, IUser } from './users.interface';
 import { ISite } from '../sites/sites.interface';
 import { IGroup } from '../groups/groups.interface';
 import "reflect-metadata";
 import { MockAuthConnector } from '../auth/auth.spec';
 import { ILifeStage } from '../life-stages/life-stage.interface';
+import { IContact } from '../contact/contact.interface';
 
 @injectable()
 export class MockUsersConnector implements IUsersConnector {
@@ -44,7 +45,11 @@ export class MockUsersConnector implements IUsersConnector {
 
     public getLifeStage(UserID: number): Promise<ILifeStage> {
         return null;
-    } 
+    }
+
+    public getContactDetails(ContactID: number): Promise<IContact> {
+        return null;
+    }
 }
 
 it('fetches single user with site', async () => {

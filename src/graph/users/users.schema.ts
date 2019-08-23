@@ -19,5 +19,6 @@ export default gql`
    site: Site
    groups: [Group!]
    lifeStage: LifeStage
+   contact: Contact
   }
 `;

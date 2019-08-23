@@ -5,6 +5,7 @@ import { IUsersConnector, IUser } from "./users.interface";
 import { Mongo } from '../../sources/mongo';
 import { ILifeStage } from "../life-stages/life-stage.interface";
 import { Types } from "../../ioc/types";
+import { IContact } from "../contact/contact.interface";
 
 const MP = require("ministry-platform");
 
@@ -94,5 +95,21 @@ export class UsersConnector implements IUsersConnector {
             .then((document) => {
                 return this.getLifeStage(UserID);
             });
+    }
+
+    public getContactDetails(ContactID: number): Promise<IContact> {
+        const filter = `Contacts.[Contact_ID] = ${ContactID}`;
+        const table = `Contacts`;
+        const mp = new MP();
+        return mp
+            .fromTable(table)
+            .withFilter(filter)
+            .get()
+            .then(response => {
+                return {
+                    nickName: response.data[0].Nickname,
+                    firstName: response.data[0].First_Name
+                }
+            })
     }
 }
