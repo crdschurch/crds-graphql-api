@@ -1,4 +1,4 @@
-import Content from "./content.base";
+import Content from "../../content.base";
 
 export default class Location extends Content {
 

@@ -1,4 +1,4 @@
-import Series from "./content_types/series";
+import Series from "./content_types/series/series";
 
 export interface IContent {
     title: string
@@ -15,6 +15,7 @@ export interface IContent {
 
 export interface IContentConnector {
     getSeriesDataForMessages(item): Promise<Series>
+    getContent(filters): Promise<IContent[]>
 }
 
 export interface IContentService {

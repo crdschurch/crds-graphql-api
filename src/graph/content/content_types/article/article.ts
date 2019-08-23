@@ -1,6 +1,6 @@
-import { ContentUtils } from "../content_utils";
-import Content from "./content.base";
-import Author, { getAuthors } from "./author";
+import { ContentUtils } from "../../content_utils";
+import Content from "../../content.base";
+import Author, { getAuthors } from "../author/author";
 
 export default class Article extends Content {
   public authors: Author[];

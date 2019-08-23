@@ -1,9 +1,9 @@
-import Content from "./content.base";
-import { ContentUtils } from "../content_utils";
-import { Types } from "../../../ioc/types";
-import Series from "./series";
-import container from "../../../ioc/inversify.config";
-import { ContentConnector } from "../content.connector";
+import Content from "../../content.base";
+import { ContentUtils } from "../../content_utils";
+import { Types } from "../../../../ioc/types";
+import Series from "../series/series";
+import container from "../../../../ioc/inversify.config";
+import { ContentConnector } from "../../content.connector";
 
 export default class Message extends Content {
     public duration: string;

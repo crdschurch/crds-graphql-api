@@ -1,5 +1,5 @@
-import { IContent } from "../content.interface";
-import { ContentUtils } from "../content_utils";
+import { IContent } from "./content.interface";
+import { ContentUtils } from "./content_utils";
 
 export default class Content implements IContent {
 
@@ -10,7 +10,6 @@ export default class Content implements IContent {
     public description: string;
     public slug: string;
     public interaction_count: number;
-    public objectID: string;
     public id: string;
     public imageUrl: string;
 
@@ -23,7 +22,6 @@ export default class Content implements IContent {
         this.description = fields.description;
         this.imageUrl = fields.image && fields.image.fields ? ContentUtils.getImgixURL(fields.image.fields.file.url) : null;
         this.interaction_count = fields.interaction_count;
-        this.objectID = entry.sys.id;
         this.id = entry.sys.id;
         this.slug = fields.slug;
     }

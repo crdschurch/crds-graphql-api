@@ -8,7 +8,7 @@ import { ISite } from '../sites/sites.interface';
 import { IGroup } from '../groups/groups.interface';
 import "reflect-metadata";
 import { MockAuthConnector } from '../auth/auth.spec';
-import { ILifeStage } from '../life-stages/life-stage.interface';
+import { ILifeStage } from '../content/content_types/life-stage/life-stage.interface';
 
 @injectable()
 export class MockUsersConnector implements IUsersConnector {
