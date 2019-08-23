@@ -1,7 +1,7 @@
 import { ISite } from "../sites/sites.interface";
 import { IGroup } from "../groups/groups.interface";
-import { ILifeStage } from "../life-stages/life-stage.interface";
 import { IContact } from "../contact/contact.interface";
+import { ILifeStage } from "../content/content_types/life-stage/life-stage.interface";
 
 export interface IUsersConnector {
     getCongregation(HouseholdID: number): Promise<ISite>

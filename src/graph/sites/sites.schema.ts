@@ -5,7 +5,7 @@ export default gql`
     sites(filter: String): [Site!]
   }
 
-  type Site @cacheControl(scope: PUBLIC, maxAge: 10) {
+  type Site {
    id: ID!
    name: String!
   }

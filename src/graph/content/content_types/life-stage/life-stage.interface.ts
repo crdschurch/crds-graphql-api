@@ -1,7 +1,6 @@
-import { IContent } from "../content/content.interface";
+import { IContent } from "../../content.interface";
 
 export interface ILifeStageConnector {
-  getLifeStages(): Promise<ILifeStage[]>
   getLifeStageContent(id: string): Promise<IContent[]>
 }
 

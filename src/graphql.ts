@@ -1,4 +1,4 @@
-import { ApolloServer } from "apollo-server-express";
+import { ApolloServer, makeExecutableSchema } from "apollo-server-express";
 import { Express } from "express";
 import * as http from "http";
 import { inject, injectable } from "inversify";
@@ -10,7 +10,7 @@ import { IUsersConnector } from "./graph/users/users.interface";
 import { ISitesConnector } from "./graph/sites/sites.interface";
 import { RedisCache } from "apollo-server-cache-redis";
 import responseCachePlugin from "apollo-server-plugin-response-cache";
-import { ILifeStageConnector } from "./graph/life-stages/life-stage.interface";
+import { ILifeStageConnector } from "./graph/content/content_types/life-stage/life-stage.interface";
 import { Analytics } from "./config/analytics";
 import { Logger } from "./config/logging";
 import { IContentConnector } from "./graph/content/content.interface";
@@ -39,8 +39,11 @@ export class GraphqlServer {
         let app = this.app;
 
         const server = new ApolloServer({
-            typeDefs: schema,
-            resolvers,
+            schema: makeExecutableSchema({
+                typeDefs: schema,
+                resolvers,
+                inheritResolversFromInterfaces: true
+            }),
             context: ({ req }) => {
                 if (req.body.query.includes('IntrospectionQuery')) return;
                 const token = req.headers.authorization || "";
@@ -70,7 +73,11 @@ export class GraphqlServer {
             plugins: [responseCachePlugin({
                 sessionId: (requestContext) => (requestContext.request.http.headers.get('authorization') || null),
             })],
+            cacheControl: {
+                defaultMaxAge: 5,
+              },
             cache: new RedisCache(`redis://:${process.env.REDIS_PASSWORD}@${process.env.REDIS_HOST}/${process.env.REDIS_DB}`),
+
         });
 
         server.applyMiddleware({ app, path: "/" })

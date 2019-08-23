@@ -1,5 +1,5 @@
-import Content from "./content.base";
-import { ContentUtils } from "../content_utils";
+import Content from "../../content.base";
+import { ContentUtils } from "../../content_utils";
 
 export default class Series extends Content {
     public start_date: string;

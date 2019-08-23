@@ -1,6 +1,6 @@
-import { ContentUtils } from "../content_utils";
-import Content from "./content.base";
-import Podcast from "./podcast";
+import { ContentUtils } from "../../content_utils";
+import Content from "../../content.base";
+import Podcast from "../podcast/podcast";
 
 export default class Episode extends Content {
     public duration: string;
@@ -16,6 +16,7 @@ export default class Episode extends Content {
         this.date = ContentUtils.formatDate(fields.published_at);
         this.transcription = fields.transcription;
         this.podcast = new Podcast(fields.podcast);
+        this.imageUrl = this.imageUrl || this.podcast.imageUrl;
     }
 
     public getQualifiedUrl(): Promise<string> {

@@ -1,6 +1,6 @@
-import Content from "./content.base";
-import { ContentUtils } from "../content_utils";
-import Album from "./album";
+import Content from "../../content.base";
+import { ContentUtils } from "../../content_utils";
+import Album from "../album/album";
 
 export default class Song extends Content {
     public duration: string;

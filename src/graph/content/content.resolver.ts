@@ -1,12 +1,27 @@
 import { IContext } from "../context/context.interface";
-import Author from "./content_types/author";
+import { IContent } from "./content.interface";
+import LifeStageResolver from './content_types/life-stage/life-stage.resolver';
+import camelCase from 'camelcase';
 
 const resolverMap: any = {
-    Author: {
-        qualifiedUrl: (parent: Author, args, { authData, dataSources }: IContext) => {
+    Query: {
+        promos: (parent, args, { authData, dataSources }: IContext) => {
+            return dataSources.contentConnector.getContent({ 'content_type': 'promo' });
+        }
+    },
+    Media: {
+        __resolveType(content: IContent, context, info) {
+            return camelCase(content.contentType, {pascalCase: true});
+        },
+        qualifiedUrl: (parent: IContent, args, { authData, dataSources }: IContext) => {
             return parent.getQualifiedUrl();
         }
-    }
+    },
+    Content: {
+        __resolveType(content: IContent, context, info) {
+            return camelCase(content.contentType, {pascalCase: true});
+        },
+    },
 };
 
-export default resolverMap;
+export default [resolverMap, LifeStageResolver];
