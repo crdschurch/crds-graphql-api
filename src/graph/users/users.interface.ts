@@ -1,8 +1,7 @@
 import { ISite } from "../sites/sites.interface";
 import { IGroup } from "../groups/groups.interface";
 import { ILifeStage } from "../content/content_types/life-stage/life-stage.interface";
-import { Mongo } from "../../sources/mongo";
-import { DataSource } from "apollo-datasource";
+import { IContact } from "./contact/contact.interface";
 
 export interface IUsersConnector {
     getCongregation(HouseholdID: number): Promise<ISite>
@@ -10,6 +9,7 @@ export interface IUsersConnector {
     setCongregation(HouseholdID: number, SiteID: number): Promise<ISite>
     getLifeStage(UserID: number): Promise<ILifeStage>
     setLifeStage(UserID: number, lifeStage: ILifeStage):  Promise<ILifeStage>
+    getContactDetails(ContactID: number): Promise<IContact>
 }
 
 export interface IUser {

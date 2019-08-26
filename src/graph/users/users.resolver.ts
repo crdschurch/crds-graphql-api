@@ -25,6 +25,9 @@ export const UserResolver = {
     }
   },
   User: {
+    id: (user, args, { authData }: IContext) => {
+      return authData.UserId;
+    },
     site: (user, args, { authData, dataSources }: IContext) => {
       return dataSources.usersConnector.getCongregation(authData.HouseholdId);
     },
@@ -33,6 +36,9 @@ export const UserResolver = {
     },
     lifeStage: (user, args, { authData, dataSources }: IContext) => {
       return dataSources.usersConnector.getLifeStage(authData.ContactId);
+    },
+    contact: (user, args, {authData, dataSources }: IContext) => {
+      return dataSources.usersConnector.getContactDetails(authData.ContactId);
     }
   }
 };
