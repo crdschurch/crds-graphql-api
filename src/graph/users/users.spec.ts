@@ -57,14 +57,14 @@ export class MockUsersConnector implements IUsersConnector {
     }
 }
 
-it('fetches single user with site', async () => {
-    const server = new ApolloServer({
-        typeDefs: schema,
-        resolvers: resolvers,
-        context: () => (new MockAuthConnector().authenticate('fakeTokenDoesntMatter')),
-        dataSources: (): any => ({ usersConnector: new MockUsersConnector() })
-    });
+const server = new ApolloServer({
+    typeDefs: schema,
+    resolvers: resolvers,
+    context: () => (new MockAuthConnector().authenticate('fakeTokenDoesntMatter')),
+    dataSources: (): any => ({ usersConnector: new MockUsersConnector() })
+});
 
+it('fetches single user with site', async () => {
     const { query } = createTestClient(server);
     const res = await query({
         query: `{
@@ -87,13 +87,6 @@ it('fetches single user with site', async () => {
 });
 
 it('fetches single user with groups', async () => {
-    const server = new ApolloServer({
-        typeDefs: schema,
-        resolvers: resolvers,
-        context: () => (new MockAuthConnector().authenticate('fakeTokenDoesntMatter')),
-        dataSources: (): any => ({ usersConnector: new MockUsersConnector() })
-    });
-
     const { query } = createTestClient(server);
     const res = await query({
         query: `{
@@ -121,13 +114,6 @@ it('fetches single user with groups', async () => {
 });
 
 it('fetches single user with site and groups', async () => {
-    const server = new ApolloServer({
-        typeDefs: schema,
-        resolvers: resolvers,
-        context: () => (new MockAuthConnector().authenticate('fakeTokenDoesntMatter')),
-        dataSources: (): any => ({ usersConnector: new MockUsersConnector() })
-    });
-
     const { query } = createTestClient(server);
     const res = await query({
         query: `{
@@ -162,13 +148,6 @@ it('fetches single user with site and groups', async () => {
 });
 
 it('tries to get undefined property on users schema', async() => {
-    const server = new ApolloServer({
-        typeDefs: schema,
-        resolvers: resolvers,
-        context: () => (new MockAuthConnector().authenticate('fakeTokenDoesntMatter')),
-        dataSources: (): any => ({ usersConnector: new MockUsersConnector() })
-    });
-
     const { query } = createTestClient(server);
     const res = await query({
         query: `{
