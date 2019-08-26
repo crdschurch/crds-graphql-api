@@ -1,12 +1,12 @@
 import { gql } from "apollo-server-express";
 import ArticleSchema from './content_types/article/article.schema';
 import AuthorSchema from './content_types/author/author.schema';
-import EpisodeSchema from './content_types/Episode/Episode.schema';
-import MessageSchema from './content_types/Message/Message.schema';
-import PodcastSchema from './content_types/Podcast/Podcast.schema';
-import PromoSchema from './content_types/Promo/Promo.schema';
-import Serieschema from './content_types/Series/Series.schema';
-import VideoSchema from './content_types/Video/Video.schema';
+import EpisodeSchema from './content_types/episode/episode.schema';
+import MessageSchema from './content_types/message/message.schema';
+import PodcastSchema from './content_types/podcast/podcast.schema';
+import PromoSchema from './content_types/promo/promo.schema';
+import Serieschema from './content_types/series/series.schema';
+import VideoSchema from './content_types/video/video.schema';
 import LifeStageSchema from './content_types/life-stage/life-stage.schema';
 
 const ContentSchema = gql`
