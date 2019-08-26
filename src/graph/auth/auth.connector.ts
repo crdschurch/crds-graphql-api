@@ -15,9 +15,15 @@ export class AuthConnector implements IAuthConnector {
         };
         return axios.get(`${process.env.AUTH_SERVICE_BASE_URL}/api/authorize`, config)
             .then(authResponse => {
-                if(!authResponse.data) return null;
+                if (!authResponse.data) return null;
                 return {
-                    authData: authResponse.data.UserInfo.Mp
+                    authData: {
+                        userInfo: authResponse.data.UserInfo.Mp,
+                        roles: {
+                            ...authResponse.data.Authorization.MpRoles,
+                            ...authResponse.data.Authorization.OktaRoles
+                        }
+                    }
                 };
             }).catch(error => {
                 return null;
