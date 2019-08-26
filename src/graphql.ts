@@ -48,7 +48,6 @@ export class GraphqlServer {
                 if (req.body.query.includes('IntrospectionQuery')) return;
                 const token = req.headers.authorization || "";
                 return this.authConnector.authenticate(token).then((user) => {
-                    if (!user) throw new Error('Not Authenticated.');
                     return user;
                 });
             },

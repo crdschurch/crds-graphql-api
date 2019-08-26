@@ -8,9 +8,11 @@ export const UserResolver = {
   },
   Mutation: {
     setSite: (parent, args, { authData, dataSources }: IContext) => {
+      if(!authData) throw new Error("You are not authorized.");
       return dataSources.usersConnector.setCongregation(authData.HouseholdId, parseInt(args.siteId));
     },
     setLifeStage: (parent, args, { authData, dataSources }: IContext) => {
+      if(!authData) throw new Error("You are not authorized.");
       const response = dataSources.usersConnector.setLifeStage(authData.ContactId, args.lifeStage);
       try {
         dataSources.analytics.client.track({
@@ -29,15 +31,19 @@ export const UserResolver = {
       return authData.UserId;
     },
     site: (user, args, { authData, dataSources }: IContext) => {
+      if(!authData) throw new Error("You are not authorized.");
       return dataSources.usersConnector.getCongregation(authData.HouseholdId);
     },
     groups: (user, args, { authData, dataSources }: IContext) => {
+      if(!authData) throw new Error("You are not authorized.");
       return dataSources.usersConnector.getGroups(authData.ContactId);
     },
     lifeStage: (user, args, { authData, dataSources }: IContext) => {
+      if(!authData) throw new Error("You are not authorized.");
       return dataSources.usersConnector.getLifeStage(authData.ContactId);
     },
     contact: (user, args, {authData, dataSources }: IContext) => {
+      if(!authData) throw new Error("You are not authorized.");
       return dataSources.usersConnector.getContactDetails(authData.ContactId);
     }
   }

@@ -12,7 +12,7 @@ const MP = require("ministry-platform");
 @injectable()
 export class UsersConnector implements IUsersConnector {
 
-    constructor(@inject(Types.Mongo) private mongo: Mongo) {}
+    constructor(@inject(Types.Mongo) private mongo: Mongo) { }
 
     public getCongregation(HouseholdID: number): Promise<ISite> {
         const filter = `Households.[Household_ID] = ${HouseholdID}`;
@@ -85,6 +85,9 @@ export class UsersConnector implements IUsersConnector {
             .then((document) => {
                 if (!document) return null;
                 return document.lifeStage
+            })
+            .catch((err) => {
+                console.log(err)
             });
     }
 
