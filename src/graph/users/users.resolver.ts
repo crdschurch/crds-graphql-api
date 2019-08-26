@@ -1,4 +1,5 @@
 import { IContext } from "../context/context.interface";
+import { authorize } from "../../config/authorization";
 
 export const UserResolver = {
   Query: {
@@ -8,13 +9,15 @@ export const UserResolver = {
   },
   Mutation: {
     setSite: (parent, args, { authData, dataSources }: IContext) => {
-      return dataSources.usersConnector.setCongregation(authData.HouseholdId, parseInt(args.siteId));
+      authorize(authData);
+      return dataSources.usersConnector.setCongregation(authData.userInfo.HouseholdId, parseInt(args.siteId));
     },
     setLifeStage: (parent, args, { authData, dataSources }: IContext) => {
-      const response = dataSources.usersConnector.setLifeStage(authData.ContactId, args.lifeStage);
+      authorize(authData);
+      const response = dataSources.usersConnector.setLifeStage(authData.userInfo.ContactId, args.lifeStage);
       try {
         dataSources.analytics.client.track({
-          userId: authData.ContactId,
+          userId: authData.userInfo.ContactId,
           event: 'LifeStageUpdated',
           properties: args
         });
@@ -26,19 +29,23 @@ export const UserResolver = {
   },
   User: {
     id: (user, args, { authData }: IContext) => {
-      return authData.UserId;
+      return authData.userInfo.UserId;
     },
     site: (user, args, { authData, dataSources }: IContext) => {
-      return dataSources.usersConnector.getCongregation(authData.HouseholdId);
+      authorize(authData);
+      return dataSources.usersConnector.getCongregation(authData.userInfo.HouseholdId);
     },
     groups: (user, args, { authData, dataSources }: IContext) => {
-      return dataSources.usersConnector.getGroups(authData.ContactId);
+      authorize(authData);
+      return dataSources.usersConnector.getGroups(authData.userInfo.ContactId);
     },
     lifeStage: (user, args, { authData, dataSources }: IContext) => {
-      return dataSources.usersConnector.getLifeStage(authData.ContactId);
+      authorize(authData);
+      return dataSources.usersConnector.getLifeStage(authData.userInfo.ContactId);
     },
-    contact: (user, args, {authData, dataSources }: IContext) => {
-      return dataSources.usersConnector.getContactDetails(authData.ContactId);
+    contact: (user, args, { authData, dataSources }: IContext) => {
+      authorize(authData);
+      return dataSources.usersConnector.getContactDetails(authData.userInfo.ContactId);
     }
   }
 };
