@@ -3,7 +3,6 @@ import userSchema from './graph/users/users.schema';
 import siteSchema from './graph/sites/sites.schema';
 import groupsSchema from './graph/groups/groups.schema';
 import contentSchema from './graph/content/content.schema';
-import contactSchema from './graph/contact/contact.schema';
 
 const linkSchema = gql`
   type Query {
@@ -19,4 +18,4 @@ const linkSchema = gql`
   }
 `;
 
-export default [linkSchema, userSchema, siteSchema, groupsSchema, ...contentSchema, contactSchema];
+export default [linkSchema, userSchema, siteSchema, groupsSchema, ...contentSchema];

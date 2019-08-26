@@ -21,4 +21,9 @@ export default gql`
    lifeStage: LifeStage
    contact: Contact
   }
+
+  type Contact {
+    nickName: String!
+    firstName: String!
+  }
 `;

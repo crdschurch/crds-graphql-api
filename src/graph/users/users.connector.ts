@@ -5,7 +5,7 @@ import { IUsersConnector, IUser } from "./users.interface";
 import { Mongo } from '../../sources/mongo';
 import { ILifeStage } from "../content/content_types/life-stage/life-stage.interface";
 import { Types } from "../../ioc/types";
-import { IContact } from "../contact/contact.interface";
+import { IContact } from "./contact/contact.interface";
 
 const MP = require("ministry-platform");
 

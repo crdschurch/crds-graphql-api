@@ -9,7 +9,7 @@ import { IGroup } from '../groups/groups.interface';
 import "reflect-metadata";
 import { MockAuthConnector } from '../auth/auth.spec';
 import { ILifeStage } from '../content/content_types/life-stage/life-stage.interface';
-import { IContact } from '../contact/contact.interface';
+import { IContact } from './contact/contact.interface';
 
 @injectable()
 export class MockUsersConnector implements IUsersConnector {
