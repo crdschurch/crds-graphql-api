@@ -86,9 +86,6 @@ export class UsersConnector implements IUsersConnector {
                 if (!document) return null;
                 return document.lifeStage
             })
-            .catch((err) => {
-                console.log(err)
-            });
     }
 
     public setLifeStage(UserID: number, lifeStage?: ILifeStage): Promise<ILifeStage> {
