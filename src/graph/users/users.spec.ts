@@ -48,7 +48,12 @@ export class MockUsersConnector implements IUsersConnector {
     }
     
     public getContactDetails(ContactID: number): Promise<IContact> {
-        return null;
+        return new Promise((resolve, reject) => {
+            resolve({
+                firstName: 'Bob',
+                nickName: 'Bobby Boy'
+            })
+        })
     }
 }
 
@@ -109,7 +114,7 @@ it('fetches single user with groups', async () => {
                 id: "1",
                 name: 'test group',
                 role: 'member',
-                type: "2"
+                type: 2
             }]
         }
     });
@@ -150,7 +155,7 @@ it('fetches single user with site and groups', async () => {
                 id: "1",
                 name: 'test group',
                 role: 'member',
-                type: "2"
+                type: 2
             }]
         }
     });
