@@ -29,6 +29,7 @@ export const UserResolver = {
   },
   User: {
     id: (user, args, { authData }: IContext) => {
+      authorize(authData);
       return authData.userInfo.UserId;
     },
     site: (user, args, { authData, dataSources }: IContext) => {
