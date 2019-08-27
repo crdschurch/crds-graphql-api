@@ -3,8 +3,9 @@ import { authorize } from "../../config/authorization";
 
 export const UserResolver = {
   Query: {
-    user: (parent, args, context) => {
-      return context;
+    user: (parent, args, { authData, dataSources }: IContext) => {
+      authorize(authData);
+      return authData.userInfo;
     }
   },
   Mutation: {
