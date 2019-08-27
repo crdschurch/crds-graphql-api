@@ -28,7 +28,7 @@ export class Logger {
     }
 
     public logResponseBody(res): void {
-        if (res && res.data.__schema) return;
+        if (res && res.data && res.data.__schema) return;
         var log = {
             application: this.application,
             environment: process.env.CRDS_ENV,
