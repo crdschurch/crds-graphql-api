@@ -2,8 +2,8 @@ import { gql } from "apollo-server-express";
 
 export default gql`
 
-type Video implements Media {
-    id: String!
+type Podcast implements Media {
+    id: ID!
     title: String
     contentType: String!
     slug: String
@@ -13,5 +13,5 @@ type Video implements Media {
     imageUrl: String
     qualifiedUrl: String
     description: String
-  }
+}
 `;

@@ -1,5 +1,5 @@
 import { IContent } from './content.interface';
-import * as ContentTypes from './content_types';
+import * as ContentTypes from './contentTypes';
 import camelCase from 'camelcase';
 
 export class ContentFactory {

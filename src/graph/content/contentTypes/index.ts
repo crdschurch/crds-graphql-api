@@ -12,7 +12,7 @@ import Promo from './promo/promo';
 import Series from './series/series';
 import Song from './song/song';
 import Video from './video/video';
-import LifeStage from './life-stage/life-stage';
+import LifeStage from './lifeStage/lifeStage';
 
 export {
       Album
