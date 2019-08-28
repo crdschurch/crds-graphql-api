@@ -1,8 +1,15 @@
 import { gql } from "apollo-server-express";
 
 export default gql`
+  extend type Query {
+    contentBlocks(filters: ContentBlockInput): [ContentBlock]
+  }
 
-type Author implements Media {
+  input ContentBlockInput {
+    category: String
+  }
+
+  type ContentBlock implements Content {
     id: ID!
     title: String
     contentType: String!
@@ -11,4 +18,4 @@ type Author implements Media {
     type: String!
     category: String!
   }
-  `;
+`;

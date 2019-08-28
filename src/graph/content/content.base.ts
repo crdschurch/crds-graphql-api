@@ -17,7 +17,7 @@ export default class Content implements IContent {
         var fields = entry.fields;
         this.title = fields.title;
         this.contentType = entry.sys.contentType.sys.id;
-        this.category = fields.category ? fields.category.fields.title : null;
+        this.category = fields.category &&  fields.category.fields ? fields.category.fields.title : null;
         this.tags = fields.tags ? fields.tags.map(t => t.fields ? t.fields.title : null) : null;
         this.description = fields.description;
         this.imageUrl = fields.image && fields.image.fields ? ContentUtils.getImgixURL(fields.image.fields.file.url) : null;

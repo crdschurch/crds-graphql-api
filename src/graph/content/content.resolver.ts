@@ -1,14 +1,11 @@
 import { IContext } from "../context/context.interface";
 import { IContent } from "./content.interface";
 import LifeStageResolver from './contentTypes/lifeStage/lifeStage.resolver';
+import PromoResolver from './contentTypes/promo/promo.resolver';
+import ContentBlockResolver from './contentTypes/contentBlock/contentBlock.resolver';
 import camelCase from 'camelcase';
 
 const resolverMap: any = {
-    Query: {
-        promos: (parent, args, { authData, dataSources }: IContext) => {
-            return dataSources.contentConnector.getContent({ 'content_type': 'promo' });
-        }
-    },
     Media: {
         __resolveType(content: IContent, context, info) {
             return camelCase(content.contentType, {pascalCase: true});
@@ -24,4 +21,4 @@ const resolverMap: any = {
     },
 };
 
-export default [resolverMap, LifeStageResolver];
+export default [resolverMap, ...LifeStageResolver, ...PromoResolver, ...ContentBlockResolver];

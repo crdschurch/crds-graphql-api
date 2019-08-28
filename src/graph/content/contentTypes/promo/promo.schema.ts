@@ -1,7 +1,11 @@
 import { gql } from "apollo-server-express";
 
 export default gql`
-type Promo implements Media {
+  extend type Query {
+    promos: [Promo]
+  }
+
+  type Promo implements Media {
     id: ID!
     title: String
     contentType: String!

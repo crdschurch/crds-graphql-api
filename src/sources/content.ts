@@ -32,7 +32,14 @@ export class ContentService implements IContentService {
   }
 
   public getContent(filters: object): Promise<any> {
-    return this.getNextEntries(filters, [], 0);
+    const newFilters = {};
+    Object.keys(filters).forEach(key => {
+      var newKey = key;
+      if (key != 'content_type') newKey = 'fields.' + newKey
+      newKey = newKey.replace('.id', '.sys.id');
+      newFilters[newKey] = filters[key]
+    });
+    return this.getNextEntries(newFilters, [], 0);
   }
 
 }

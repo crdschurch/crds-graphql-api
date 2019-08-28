@@ -15,15 +15,4 @@ export class ContentConnector implements IContentConnector {
                 return entries.map(entry => ContentFactory.instantiate(entry));
             });
     }
-
-    public getSeriesDataForMessages(item): Promise<Series> {
-        if (item.contentType !== 'message') return item;
-        return this.contentService.getContent({
-            'content_type': 'series',
-            'fields.videos.sys.id': item.id
-        }).then((entries) => {
-            if (entries.length === 0) return null;
-            return new Series(entries[0]);
-        });
-    }
 }
