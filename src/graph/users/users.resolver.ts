@@ -1,5 +1,6 @@
 import { IContext } from "../context/context.interface";
 import { authorize } from "../../config/authorization";
+import { ValidationError } from 'apollo-server-express'
 
 export const UserResolver = {
   Query: {
@@ -11,6 +12,7 @@ export const UserResolver = {
   Mutation: {
     setSite: (parent, args, { authData, dataSources }: IContext) => {
       authorize(authData);
+      if(Number.isNaN(parseInt(args.siteId))) throw new ValidationError(`SiteId: ${args.siteId} is not a number`)
       return dataSources.usersConnector.setCongregation(authData.userInfo.HouseholdId, parseInt(args.siteId));
     },
     setLifeStage: (parent, args, { authData, dataSources }: IContext) => {
