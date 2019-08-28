@@ -1,6 +1,6 @@
 import { IContext } from "../context/context.interface";
 import { IContent } from "./content.interface";
-import LifeStageResolver from './content_types/life-stage/life-stage.resolver';
+import LifeStageResolver from './contentTypes/lifeStage/lifeStage.resolver';
 import camelCase from 'camelcase';
 
 const resolverMap: any = {

@@ -3,7 +3,7 @@ import { ISite } from "../sites/sites.interface";
 import { IGroup } from "../groups/groups.interface";
 import { IUsersConnector, IUser } from "./users.interface";
 import { Mongo } from '../../sources/mongo';
-import { ILifeStage } from "../content/content_types/life-stage/life-stage.interface";
+import { ILifeStage } from "../content/contentTypes/lifeStage/lifeStage.interface";
 import { Types } from "../../ioc/types";
 import { IContact } from "./contact/contact.interface";
 

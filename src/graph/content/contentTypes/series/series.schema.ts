@@ -2,8 +2,8 @@ import { gql } from "apollo-server-express";
 
 export default gql`
 
-type Message implements Media {
-    id: String!
+type Series implements Media {
+    id: ID!
     title: String
     contentType: String!
     slug: String

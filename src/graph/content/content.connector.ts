@@ -1,7 +1,7 @@
 import { injectable, inject } from "inversify";
 import { Types } from "../../ioc/types";
 import { IContentConnector, IContentService, IContent } from "../content/content.interface";
-import Series from "./content_types/series/series";
+import Series from "./contentTypes/series/series";
 import { ContentFactory } from "./content.factory";
 
 @injectable()

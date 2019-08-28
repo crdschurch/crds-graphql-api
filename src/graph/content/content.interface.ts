@@ -1,4 +1,4 @@
-import Series from "./content_types/series/series";
+import Series from "./contentTypes/series/series";
 
 export interface IContent {
     title: string

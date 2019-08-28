@@ -10,7 +10,6 @@ import { IUsersConnector } from "./graph/users/users.interface";
 import { ISitesConnector } from "./graph/sites/sites.interface";
 import { RedisCache } from "apollo-server-cache-redis";
 import responseCachePlugin from "apollo-server-plugin-response-cache";
-import { ILifeStageConnector } from "./graph/content/content_types/life-stage/life-stage.interface";
 import { Analytics } from "./config/analytics";
 import { Logger } from "./config/logging";
 import { IContentConnector } from "./graph/content/content.interface";
@@ -28,7 +27,6 @@ export class GraphqlServer {
         @inject(Types.AuthConnector) private authConnector: IAuthConnector,
         @inject(Types.UsersConnector) private usersConnector: IUsersConnector,
         @inject(Types.SitesConnector) private sitesConnector: ISitesConnector,
-        @inject(Types.LifeStageConnector) private lifeStageConnector: ILifeStageConnector,
         @inject(Types.ContentConnector) private contentConnector: IContentConnector,
         @inject(Types.Analytics) private analytics: Analytics,
         @inject(Types.Logger) private logger: Logger
@@ -55,7 +53,6 @@ export class GraphqlServer {
                 return {
                     usersConnector: this.usersConnector,
                     sitesConnector: this.sitesConnector,
-                    lifeStageConnector: this.lifeStageConnector,
                     contentConnector: this.contentConnector,
                     analytics: this.analytics,
                     logger: this.logger

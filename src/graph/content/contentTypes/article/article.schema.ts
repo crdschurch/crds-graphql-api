@@ -2,8 +2,8 @@ import { gql } from "apollo-server-express";
 
 export default gql`
 
-type Series implements Media {
-    id: String!
+type Article implements Media {
+    id: ID!
     title: String
     contentType: String!
     slug: String
@@ -14,4 +14,4 @@ type Series implements Media {
     qualifiedUrl: String
     description: String
   }
-`;
+  `;

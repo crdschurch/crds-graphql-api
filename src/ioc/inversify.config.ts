@@ -6,7 +6,6 @@ import { Server } from "../server";
 import { Types } from "./types";
 import { AuthConnector } from "../graph/auth/auth.connector";
 import { SitesConnector } from "../graph/sites/sites.connector";
-import { LifeStageConnector } from "../graph/content/content_types/life-stage/life-stage.connector";
 import { Mongo } from "../sources/mongo";
 import { ContentService } from "../sources/content";
 import { Analytics } from "../config/analytics";
@@ -26,8 +25,6 @@ container.bind<AuthConnector>(Types.AuthConnector)
     .to(AuthConnector);
 container.bind<SitesConnector>(Types.SitesConnector)
     .to(SitesConnector);
-container.bind<LifeStageConnector>(Types.LifeStageConnector)
-    .to(LifeStageConnector);
 container.bind<ContentConnector>(Types.ContentConnector)
     .to(ContentConnector);
 container.bind<Mongo>(Types.Mongo)
