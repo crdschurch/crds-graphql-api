@@ -8,4 +8,4 @@ const resolverMap: any = {
     },
 };
 
-export default [resolverMap];
+export default resolverMap;

@@ -21,4 +21,4 @@ const resolverMap: any = {
     },
 };
 
-export default [resolverMap, ...LifeStageResolver, ...PromoResolver, ...ContentBlockResolver];
+export default [resolverMap, LifeStageResolver, PromoResolver, ContentBlockResolver];
