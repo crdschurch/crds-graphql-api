@@ -4,6 +4,7 @@ import { Types } from "../../../../ioc/types";
 import Series from "../series/series";
 import container from "../../../../ioc/inversify.config";
 import { ContentConnector } from "../../content.connector";
+import { IContent } from "../../content.interface";
 
 export default class Message extends Content {
     public duration: string;
@@ -26,9 +27,12 @@ export default class Message extends Content {
             });
 
         return container.get<ContentConnector>(Types.ContentConnector)
-            .getSeriesDataForMessages(this)
-            .then((series: Series) => {
-                this.series = series;
+            .getContent({
+                'content_type': 'series',
+                'videos.id': this.id
+            })
+            .then((series: IContent[]) => {
+                this.series = <Series>series[0];
                 return this.buildUrl();
             });
     }

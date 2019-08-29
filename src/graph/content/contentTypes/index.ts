@@ -13,6 +13,7 @@ import Series from './series/series';
 import Song from './song/song';
 import Video from './video/video';
 import LifeStage from './lifeStage/lifeStage';
+import ContentBlock from './contentBlock/contentBlock';
 
 export {
       Album
@@ -30,4 +31,5 @@ export {
     , Song
     , Video
     , LifeStage
+    , ContentBlock
 }

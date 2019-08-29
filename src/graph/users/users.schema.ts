@@ -1,4 +1,4 @@
-import { gql } from 'apollo-server-express';
+import { gql } from "apollo-server-express";
 
 export default gql`
   extend type Query {
@@ -13,13 +13,13 @@ export default gql`
     "set the site of user"
     setLifeStage(lifeStage: LifeStageInput): User
   }
-  
+
   type User {
-   id: ID!
-   site: Site
-   groups: [Group!]
-   lifeStage: LifeStage
-   contact: Contact
+    id: ID!
+    site: Site
+    groups: [Group!]
+    lifeStage: LifeStage
+    contact: Contact
   }
 
   type Contact {

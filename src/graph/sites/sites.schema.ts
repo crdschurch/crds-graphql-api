@@ -1,4 +1,4 @@
-import { gql } from 'apollo-server-express';
+import { gql } from "apollo-server-express";
 
 export default gql`
   extend type Query {
@@ -6,7 +6,7 @@ export default gql`
   }
 
   type Site {
-   id: ID!
-   name: String!
+    id: ID!
+    name: String!
   }
 `;
