@@ -22,8 +22,6 @@ export class SitesConnector implements ISitesConnector {
                         name: site.Congregation_Name
                     };
                 });
-            }).catch(err => {
-                console.log(err);
-            })
+            });
     }
 }

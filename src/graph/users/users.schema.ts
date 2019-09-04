@@ -1,18 +1,29 @@
-import { gql } from 'apollo-server-express';
+import { gql } from "apollo-server-express";
 
 export default gql`
   extend type Query {
-    user: User
+    user: User!
   }
 
   extend type Mutation {
     "set the site of user"
     setSite(siteId: ID!): User
   }
-  
-  type User @cacheControl(scope: PRIVATE, maxAge: 10) {
-   id: ID!
-   site: Site
-   groups: [Group!]
+  extend type Mutation {
+    "set the site of user"
+    setLifeStage(lifeStage: LifeStageInput): User
+  }
+
+  type User {
+    id: ID!
+    site: Site
+    groups: [Group!]
+    lifeStage: LifeStage
+    contact: Contact
+  }
+
+  type Contact {
+    nickName: String!
+    firstName: String!
   }
 `;

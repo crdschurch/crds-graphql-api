@@ -6,6 +6,11 @@ import { Server } from "../server";
 import { Types } from "./types";
 import { AuthConnector } from "../graph/auth/auth.connector";
 import { SitesConnector } from "../graph/sites/sites.connector";
+import { Mongo } from "../sources/mongo";
+import { ContentService } from "../sources/content";
+import { Analytics } from "../config/analytics";
+import { Logger } from "../config/logging";
+import { ContentConnector } from "../graph/content/content.connector";
 
 var container = new Container();
 
@@ -19,6 +24,16 @@ container.bind<UsersConnector>(Types.UsersConnector)
 container.bind<AuthConnector>(Types.AuthConnector)
     .to(AuthConnector);
 container.bind<SitesConnector>(Types.SitesConnector)
-    .to(SitesConnector)
+    .to(SitesConnector);
+container.bind<ContentConnector>(Types.ContentConnector)
+    .to(ContentConnector);
+container.bind<Mongo>(Types.Mongo)
+    .to(Mongo);
+container.bind<ContentService>(Types.ContentService)
+    .to(ContentService);
+container.bind<Analytics>(Types.Analytics)
+    .to(Analytics);
+container.bind<Logger>(Types.Logger)
+    .to(Logger);
 
 export default container;

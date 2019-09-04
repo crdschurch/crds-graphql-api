@@ -1,4 +1,4 @@
-import { ApolloServer } from "apollo-server-express";
+import { ApolloServer, makeExecutableSchema } from "apollo-server-express";
 import { Express } from "express";
 import * as http from "http";
 import { inject, injectable } from "inversify";
@@ -6,12 +6,13 @@ import { Types } from "./ioc/types";
 import schema from "./schema";
 import resolvers from "./resolvers";
 import { IAuthConnector } from "./graph/auth/auth.interface";
-import * as logging from "./config/logging";
 import { IUsersConnector } from "./graph/users/users.interface";
 import { ISitesConnector } from "./graph/sites/sites.interface";
 import { RedisCache } from "apollo-server-cache-redis";
 import responseCachePlugin from "apollo-server-plugin-response-cache";
-import { Vault } from "crds-vault-node";
+import { Analytics } from "./config/analytics";
+import { Logger } from "./config/logging";
+import { IContentConnector } from "./graph/content/content.interface";
 
 @injectable()
 export class GraphqlServer {
@@ -25,45 +26,57 @@ export class GraphqlServer {
     constructor(
         @inject(Types.AuthConnector) private authConnector: IAuthConnector,
         @inject(Types.UsersConnector) private usersConnector: IUsersConnector,
-        @inject(Types.SitesConnector) private sitesConnector: ISitesConnector
+        @inject(Types.SitesConnector) private sitesConnector: ISitesConnector,
+        @inject(Types.ContentConnector) private contentConnector: IContentConnector,
+        @inject(Types.Analytics) private analytics: Analytics,
+        @inject(Types.Logger) private logger: Logger
     ) { }
 
     public async start(): Promise<void> {
-        
+
         let app = this.app;
-        await new Vault(process.env.CRDS_ENV).process(['common', 'graphql']);
-        console.log(process.env);
-        logging.init();
 
         const server = new ApolloServer({
-            typeDefs: schema,
-            resolvers,
+            schema: makeExecutableSchema({
+                typeDefs: schema,
+                resolvers,
+                inheritResolversFromInterfaces: true
+            }),
             context: ({ req }) => {
-                const token = req.headers.authorization || ""
-                console.log('context creation');
-                return this.authConnector.authenticate(token);
+                if (req.body.query.includes('IntrospectionQuery')) return;
+                const token = req.headers.authorization || "";
+                return this.authConnector.authenticate(token).then((user) => {
+                    return user;
+                });
             },
             dataSources: (): any => {
                 return {
                     usersConnector: this.usersConnector,
-                    sitesConnector: this.sitesConnector
+                    sitesConnector: this.sitesConnector,
+                    contentConnector: this.contentConnector,
+                    analytics: this.analytics,
+                    logger: this.logger
                 };
             },
             formatResponse: response => {
-                logging.logResponseBody(response);
+                this.logger.logResponseBody(response);
                 return response;
             },
             formatError: error => {
-                logging.logError(error);
+                this.logger.logError(error);
                 return error;
             },
             plugins: [responseCachePlugin({
                 sessionId: (requestContext) => (requestContext.request.http.headers.get('authorization') || null),
             })],
+            cacheControl: {
+                defaultMaxAge: 5,
+              },
             cache: new RedisCache(`redis://:${process.env.REDIS_PASSWORD}@${process.env.REDIS_HOST}/${process.env.REDIS_DB}`),
+
         });
 
-        server.applyMiddleware({ app, path: "/graphql" })
+        server.applyMiddleware({ app, path: "/" })
 
         app.listen({ port: 8000 }, () => { console.log('listening on 8000') });
     }
