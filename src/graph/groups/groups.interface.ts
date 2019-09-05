@@ -4,3 +4,4 @@ export interface IGroup {
     role: string
     type: number
 }
+
