@@ -15,6 +15,7 @@ export default class Author extends Content {
 }
 
 export function getAuthors(authors: any): Author[] {
+  if (!!!authors) return null;
   if (!authors.length) return [new Author(authors)];
   return authors.map(author => new Author(author));
 }
