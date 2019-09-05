@@ -14,7 +14,7 @@ export default gql`
     setLifeStage(lifeStage: LifeStageInput): User
   }
 
-  type User {
+  type User @cacheControl(scope: PRIVATE) {
     id: ID!
     site: Site
     groups: [Group!]
