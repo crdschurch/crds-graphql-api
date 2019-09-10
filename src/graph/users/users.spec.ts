@@ -25,7 +25,8 @@ export class MockUsersConnector implements IUsersConnector {
 				id: 1,
 				name: 'test group',
 				role: 'member',
-				type: 2
+				type: 2,
+				meeting: 'test time'
 			}]);
 		})
 	}

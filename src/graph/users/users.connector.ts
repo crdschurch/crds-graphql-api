@@ -41,6 +41,9 @@ export class UsersConnector implements IUsersConnector {
       .withSelectColumns([
         "Group_Participants.[Group_Role_ID] as GroupRoleID",
         "Group_Role_ID_Table.[Role_Title] as RoleTitle",
+        "Group_ID_Table.[Meeting_Time]",
+        "Group_ID_Table_Meeting_Day_ID_Table.[Meeting_Day]",
+        "Group_ID_Table_Meeting_Frequency_ID_Table.[Meeting_Frequency]",
         "Group_ID_Table.[Group_ID]",
         "Group_ID_Table.[Group_Name]",
         "Group_ID_Table.[Group_Type_ID] as GroupTypeID",
@@ -54,6 +57,11 @@ export class UsersConnector implements IUsersConnector {
           return {
             id: group.Group_ID,
             name: group.Group_Name,
+            meeting: {
+              day: group.Meeting_Day,
+              time: group.Meeting_Time,
+              frequency: group.Meeting_Frequency
+            },
             role: {
               id: group.GroupRoleID,
               name: group.RoleTitle
