@@ -24,9 +24,19 @@ export class MockUsersConnector implements IUsersConnector {
 			resolve([{
 				id: 1,
 				name: 'test group',
-				role: 'member',
-				type: 2,
-				meeting: 'test time'
+				role: {
+					id: 1,
+					name: "my role"
+				},
+				type: {
+					id: 1,
+					name: "my type"
+				},
+				meeting: {
+					day: "Sunday",
+					time: "17:30:00",
+					frequency: "Weekly"
+				}
 			}]);
 		})
 	}
