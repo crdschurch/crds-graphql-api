@@ -14,6 +14,6 @@ export interface IUsersConnector {
 
 export interface IUser {
     id: number
-    site: ISite
-    groups: IGroup[]
+    site?: ISite
+    groups?: IGroup[]
 }

@@ -7,6 +7,7 @@ export default gql`
     role: GroupRole!
     type: GroupType!
     meeting: Meeting!
+    image: String #depends on leader having profile image
   }
 
   type GroupType {

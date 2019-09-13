@@ -9,5 +9,6 @@ export const Types = {
     Analytics: Symbol("Analytics"),
     Logger: Symbol("Logger"),
     ContentConnector: Symbol("ContentConnector"),
-    ContentService: Symbol("ContentService")
+    ContentService: Symbol("ContentService"),
+    GroupsConnector: Symbol("GroupsConnector")
 };

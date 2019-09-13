@@ -6,7 +6,6 @@ import { injectable } from 'inversify';
 import { IUsersConnector } from './users.interface';
 import { ISite } from '../sites/sites.interface';
 import { IGroup } from '../groups/groups.interface';
-import "reflect-metadata";
 import { MockAuthConnector } from '../auth/auth.spec';
 import { ILifeStage } from '../content/contentTypes/lifeStage/lifeStage.interface';
 import { IContact } from './contact/contact.interface';
@@ -36,7 +35,11 @@ export class MockUsersConnector implements IUsersConnector {
 					day: "Sunday",
 					time: "17:30:00",
 					frequency: "Weekly"
-				}
+				},
+				leader: {
+					id: 1
+				},
+				image: 'fireStoreUrl'
 			}]);
 		})
 	}
@@ -105,8 +108,14 @@ it('fetches single user with groups', async () => {
               groups {
                 id
                 name
-                role
-                type
+                role {
+									id
+									name
+								}
+                type{
+									id
+									name
+								}
               }
             }
           }
@@ -117,8 +126,14 @@ it('fetches single user with groups', async () => {
 			groups: [{
 				id: "1",
 				name: 'test group',
-				role: 'member',
-				type: 2
+				role: {
+					id: 1,
+					name: "my role"
+				},
+				type: {
+					id: 1,
+					name: 'my type'
+				}
 			}]
 		}
 	});
@@ -136,8 +151,14 @@ it('fetches single user with site and groups', async () => {
               groups {
                 id
                 name
-                role
-                type
+                role {
+									id
+									name
+								}
+                type{
+									id
+									name
+								}
               }
             }
           }
@@ -151,8 +172,14 @@ it('fetches single user with site and groups', async () => {
 			groups: [{
 				id: "1",
 				name: 'test group',
-				role: 'member',
-				type: 2
+				role: {
+					id: 1,
+					name: "my role"
+				},
+				type: {
+					id: 1,
+					name: "my type"
+				}
 			}]
 		}
 	});
@@ -170,8 +197,14 @@ it('tries to get undefined property on users schema', async () => {
               groups {
                 id
                 name
-                role
-                type
+                role {
+									id
+									name
+								}
+                type{
+									id
+									name
+								}
                 test
               }
             }
