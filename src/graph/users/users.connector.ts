@@ -136,7 +136,8 @@ export class UsersConnector implements IUsersConnector {
       .then(response => {
         return {
           nickName: response.data[0].Nickname,
-          firstName: response.data[0].First_Name
+          firstName: response.data[0].First_Name,
+          lastName: response.data[0].Last_Name
         };
       });
   }
