@@ -6,7 +6,6 @@ import { injectable } from 'inversify';
 import { IUsersConnector } from './users.interface';
 import { ISite } from '../sites/sites.interface';
 import { IGroup } from '../groups/groups.interface';
-import "reflect-metadata";
 import { MockAuthConnector } from '../auth/auth.spec';
 import { ILifeStage } from '../content/contentTypes/lifeStage/lifeStage.interface';
 import { IContact } from './contact/contact.interface';
@@ -40,7 +39,7 @@ export class MockUsersConnector implements IUsersConnector {
 				leader: {
 					id: 1
 				},
-				image: "fireStoreUrl"
+				image: 'fireStoreUrl'
 			}]);
 		})
 	}
@@ -117,7 +116,6 @@ it('fetches single user with groups', async () => {
 									id
 									name
 								}
-								image
               }
             }
           }
@@ -135,8 +133,7 @@ it('fetches single user with groups', async () => {
 				type: {
 					id: 1,
 					name: 'my type'
-				},
-				image: "fireStoreUrl"
+				}
 			}]
 		}
 	});
