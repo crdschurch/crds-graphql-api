@@ -16,4 +16,6 @@ export interface IUser {
     id: number
     site?: ISite
     groups?: IGroup[]
+    nickName?: string
+    firstName?: String
 }

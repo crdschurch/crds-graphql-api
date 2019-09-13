@@ -19,11 +19,8 @@ export default gql`
     site: Site
     groups: [Group!]
     lifeStage: LifeStage
-    contact: Contact
-  }
-
-  type Contact {
-    nickName: String!
-    firstName: String!
+    nickName: String
+    firstName: String
+    lastName: String
   }
 `;
