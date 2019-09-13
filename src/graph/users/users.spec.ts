@@ -220,20 +220,16 @@ it('fetches a users first name and nick name', async () => {
 	const res = await query({
 		query: `{
             	user {
-								contact {
 									firstName
 									nickName
-								}
 							}
 						}
           ` });
 
 	expect(res.data).toMatchObject({
 		user: {
-			contact: {
 				firstName: 'Bob',
 				nickName: 'Bobby Boy'
-			}
 		}
 	});
 })
