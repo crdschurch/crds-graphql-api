@@ -10,7 +10,7 @@ export const UserResolver = {
       info.cacheControl.setCacheHint({ scope: "PRIVATE" });
       authorize(authData);
       const topLevelFields: string[] = Object.keys(graphqlFields(info));
-      const needsContactInfo = topLevelFields.filter(value => -1 !== ["firstName", "lastName", "nickName"].indexOf(value));
+      const needsContactInfo = topLevelFields.find(value => -1 !== ["firstName", "lastName", "nickName"].indexOf(value));
       var user: any = authData.userInfo;
       if (needsContactInfo)
         user = {
