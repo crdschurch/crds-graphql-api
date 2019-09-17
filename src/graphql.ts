@@ -13,6 +13,7 @@ import responseCachePlugin from "apollo-server-plugin-response-cache";
 import { Analytics } from "./config/analytics";
 import { Logger } from "./config/logging";
 import { IContentConnector } from "./graph/content/content.interface";
+import { IGroupsConnector } from "./graph/groups/groups.interface";
 
 @injectable()
 export class GraphqlServer {
@@ -26,6 +27,7 @@ export class GraphqlServer {
     constructor(
         @inject(Types.AuthConnector) private authConnector: IAuthConnector,
         @inject(Types.UsersConnector) private usersConnector: IUsersConnector,
+        @inject(Types.GroupsConnector) private groupsConnector: IGroupsConnector,
         @inject(Types.SitesConnector) private sitesConnector: ISitesConnector,
         @inject(Types.ContentConnector) private contentConnector: IContentConnector,
         @inject(Types.Analytics) private analytics: Analytics,
@@ -54,6 +56,7 @@ export class GraphqlServer {
                     usersConnector: this.usersConnector,
                     sitesConnector: this.sitesConnector,
                     contentConnector: this.contentConnector,
+                    groupsConnector: this.groupsConnector,
                     analytics: this.analytics,
                     logger: this.logger
                 };
