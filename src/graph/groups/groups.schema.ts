@@ -8,6 +8,7 @@ export default gql`
     type: GroupType!
     meeting: Meeting!
     image: String #depends on leader having profile image
+    endDate: String
   }
 
   type GroupType {

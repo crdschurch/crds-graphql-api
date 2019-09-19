@@ -23,6 +23,7 @@ export class MockUsersConnector implements IUsersConnector {
 			resolve([{
 				id: 1,
 				name: 'test group',
+				endDate: '2019-03-01',
 				role: {
 					id: 1,
 					name: "my role"
@@ -107,7 +108,8 @@ it('fetches single user with groups', async () => {
             user {
               groups {
                 id
-                name
+								name
+								endDate
                 role {
 									id
 									name
@@ -126,6 +128,7 @@ it('fetches single user with groups', async () => {
 			groups: [{
 				id: "1",
 				name: 'test group',
+				endDate: '2019-03-01',
 				role: {
 					id: 1,
 					name: "my role"
