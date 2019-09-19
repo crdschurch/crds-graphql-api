@@ -37,6 +37,8 @@ export class UsersConnector implements IUsersConnector {
     const filter = `Group_Participants.[Participant_ID] = ${UserID}`;
     const table = "Group_Participants";
     const mp = new MP();
+    const environment = process.env.CRDS_ENV === 'prod' ? 'www' : process.env.CRDS_ENV;
+    const baseGroupUrl = `https://${environment}.crossroads.net/groups/search/small-group`;
     return mp
       .withSelectColumns([
         "Group_Participants.[Group_Role_ID] as GroupRoleID",
@@ -58,6 +60,7 @@ export class UsersConnector implements IUsersConnector {
         return response.data.map(group => {
           return {
             id: group.Group_ID,
+            url: `${baseGroupUrl}/${group.Group_ID}`,
             name: group.Group_Name,
             endDate: group.End_Date,
             meeting: {

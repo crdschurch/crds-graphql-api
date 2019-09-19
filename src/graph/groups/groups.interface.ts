@@ -2,6 +2,7 @@ import { IUser } from "../users/users.interface";
 
 export interface IGroup {
     id: number
+    url: string
     name: string
     meeting: Meeting
     role: Role

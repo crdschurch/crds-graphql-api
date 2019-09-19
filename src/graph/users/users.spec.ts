@@ -24,6 +24,7 @@ export class MockUsersConnector implements IUsersConnector {
 				id: 1,
 				name: 'test group',
 				endDate: '2019-03-01',
+				url: 'group/url',
 				role: {
 					id: 1,
 					name: "my role"

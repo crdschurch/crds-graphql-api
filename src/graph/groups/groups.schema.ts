@@ -3,6 +3,7 @@ import { gql } from 'apollo-server-express';
 export default gql`
   type Group {
     id: ID!
+    url: String!
     name: String!
     role: GroupRole!
     type: GroupType!
