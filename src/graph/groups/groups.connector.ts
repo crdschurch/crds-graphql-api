@@ -8,7 +8,6 @@ export class GroupsConnector implements IGroupsConnector {
     const table = "Participants";
     const filter = `Participants.[Contact_ID] = ${ContactID}`;
     const mp = new MP();
-    console.log(ContactID);
     return mp
       .withSelectColumns([
         "Participants.[Participant_ID]"
