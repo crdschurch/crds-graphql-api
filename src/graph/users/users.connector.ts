@@ -33,8 +33,9 @@ export class UsersConnector implements IUsersConnector {
       });
   }
 
-  public getGroups(UserID: number): Promise<IGroup[]> {
-    const filter = `Group_Participants.[Participant_ID] = ${UserID}`;
+  public getGroups(UserID: number, types?: string[]): Promise<IGroup[]> {
+    var filter = `Group_Participants.[Participant_ID] = ${UserID}`;
+    filter += types ? ` AND Group_ID_Table_Group_Type_ID_Table.[Group_Type] in (${"'" + types.join("','") + "'"})` : '';
     const table = "Group_Participants";
     const mp = new MP();
     return mp
