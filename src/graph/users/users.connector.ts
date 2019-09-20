@@ -38,6 +38,8 @@ export class UsersConnector implements IUsersConnector {
     filter += types ? ` AND Group_ID_Table_Group_Type_ID_Table.[Group_Type] in (${"'" + types.join("','") + "'"})` : '';
     filter += expired != null && !expired ? ` AND (Group_ID_Table.[End_Date] > GETDATE() OR Group_ID_Table.[End_Date] is null)
                                               AND (Group_Participants.[End_Date] > GETDATE() OR Group_Participants.[End_Date] is null)` : '';
+
+    filter += expired ? ` AND (Group_ID_Table.[End_Date] < GETDATE() OR Group_Participants.[End_Date] < GETDATE())` : '';
     const table = "Group_Participants";
     const mp = new MP();
     return mp
