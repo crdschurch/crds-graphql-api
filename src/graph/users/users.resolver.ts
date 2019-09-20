@@ -64,7 +64,7 @@ export const UserResolver = {
     groups: (user, args, { authData, dataSources }: IContext) => {
       authorize(authData);
       return dataSources.usersConnector.getGroups(
-        authData.userInfo.ParticipantId
+        authData.userInfo.ParticipantId, args.types, args.expired
       );
     },
     lifeStage: (user, args, { authData, dataSources }: IContext) => {

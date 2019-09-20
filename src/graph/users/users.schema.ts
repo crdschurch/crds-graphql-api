@@ -17,7 +17,7 @@ export default gql`
   type User {
     id: ID!
     site: Site
-    groups: [Group!]
+    groups(types: [String], expired: Boolean): [Group!]
     lifeStage: LifeStage
     nickName: String
     firstName: String
