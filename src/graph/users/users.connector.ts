@@ -33,9 +33,10 @@ export class UsersConnector implements IUsersConnector {
       });
   }
 
-  public getGroups(UserID: number, types?: string[]): Promise<IGroup[]> {
+  public getGroups(UserID: number, types?: string[], expired?: boolean): Promise<IGroup[]> {
     var filter = `Group_Participants.[Participant_ID] = ${UserID}`;
     filter += types ? ` AND Group_ID_Table_Group_Type_ID_Table.[Group_Type] in (${"'" + types.join("','") + "'"})` : '';
+    filter += expired != null && !expired ? ` AND (Group_ID_Table.[End_Date] > GETDATE() OR Group_ID_Table.[End_Date] is null)` : '';
     const table = "Group_Participants";
     const mp = new MP();
     return mp
@@ -49,7 +50,8 @@ export class UsersConnector implements IUsersConnector {
         "Group_ID_Table.[Group_Name]",
         "Group_ID_Table.[Group_Type_ID] as GroupTypeID",
         "Group_ID_Table_Group_Type_ID_Table.[Group_Type] as GroupTypeName",
-        "Group_ID_Table.[Primary_Contact]"
+        "Group_ID_Table.[Primary_Contact]",
+
       ])
       .withFilter(filter)
       .fromTable(table)
