@@ -50,7 +50,8 @@ export class UsersConnector implements IUsersConnector {
         "Group_ID_Table.[Group_Name]",
         "Group_ID_Table.[Group_Type_ID] as GroupTypeID",
         "Group_ID_Table_Group_Type_ID_Table.[Group_Type] as GroupTypeName",
-        "Group_ID_Table.[Primary_Contact]"
+        "Group_ID_Table.[Primary_Contact]",
+        "Group_ID_Table.[End_Date]"
       ])
       .withFilter(filter)
       .fromTable(table)
