@@ -8,6 +8,7 @@ export interface IGroup {
     type: Type
     leader: IUser
     image: string
+    endDate: string
 }
 
 export interface Meeting {
