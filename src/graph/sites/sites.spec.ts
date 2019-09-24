@@ -46,7 +46,7 @@ it('fetches sites', async () => {
         typeDefs: schema,
         resolvers: resolvers,
         context: () => (new MockAuthConnector().authenticate('fakeTokenDoesntMatter')),
-        dataSources: (): any => ({sitesConnector: new MocksSitesConnector()})
+        dataSources: (): any => ({sitesAPI: new MocksSitesConnector()})
     });
 
     const { query } = createTestClient(server);

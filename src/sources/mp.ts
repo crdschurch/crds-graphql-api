@@ -4,11 +4,11 @@ import jwt from "jsonwebtoken";
 import { injectable } from "inversify";
 
 @injectable()
-export class MPAuth implements IMPAuth {
+export class RestAuth implements IRestAuth {
   private static clientToken: string = null;
 
   public async authorize(): Promise<string> {
-    return !this.isExpired() ? MPAuth.clientToken : this.getAccessToken();
+    return !this.isExpired() ? RestAuth.clientToken : this.getAccessToken();
   }
 
   private getAccessToken(): Promise<string> {
@@ -25,17 +25,17 @@ export class MPAuth implements IMPAuth {
       }
     };
     return axios.post(url, data, config).then(res => {
-      MPAuth.clientToken = res.data.access_token;
-      return MPAuth.clientToken;
+      RestAuth.clientToken = res.data.access_token;
+      return RestAuth.clientToken;
     });
   }
 
   private isExpired(): boolean {
-    if (!MPAuth.clientToken) return true;
-    return jwt.decode(MPAuth.clientToken).exp < new Date().getTime() / 1000;
+    if (!RestAuth.clientToken) return true;
+    return jwt.decode(RestAuth.clientToken).exp < new Date().getTime() / 1000;
   }
 }
 
-export interface IMPAuth {
+export interface IRestAuth {
   authorize(): Promise<string>
 }

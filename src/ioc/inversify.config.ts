@@ -8,7 +8,7 @@ import { ContentService } from "../sources/content";
 import { Analytics } from "../config/analytics";
 import { Logger } from "../config/logging";
 import { ContentConnector } from "../graph/content/content.connector";
-import { MPAuth } from "../sources/mp";
+import { RestAuth } from "../sources/mp";
 
 var container = new Container();
 
@@ -19,6 +19,6 @@ container.bind<ContentConnector>(Types.ContentConnector).to(ContentConnector);
 container.bind<ContentService>(Types.ContentService).to(ContentService);
 container.bind<Analytics>(Types.Analytics).to(Analytics);
 container.bind<Logger>(Types.Logger).to(Logger);
-container.bind<MPAuth>(Types.MPAuth).to(MPAuth);
+container.bind<RestAuth>(Types.RestAuth).to(RestAuth);
 
 export default container;

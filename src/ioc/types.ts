@@ -7,5 +7,5 @@ export const Types = {
     ContentService: Symbol("ContentService"),
     Server: Symbol("Server"),
     ContentConnector: Symbol("ContentConnector"),
-    MPAuth: Symbol("MPAuth"),
+    RestAuth: Symbol("RestAuth"),
 };

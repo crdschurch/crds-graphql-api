@@ -1,17 +1,17 @@
 import { inject } from "inversify";
 import { ISite, ISitesAPI } from "./sites.interface";
 import { RESTDataSource, RequestOptions } from "apollo-datasource-rest";
-import { IMPAuth } from "../../sources/mp";
+import { IRestAuth } from "../../sources/mp";
 import { Types } from "../../ioc/types";
 
 export class SitesAPI extends RESTDataSource implements ISitesAPI {
-  constructor(@inject(Types.MPAuth) private mpAuth: IMPAuth) {
+  constructor(@inject(Types.RestAuth) private restAuth: IRestAuth) {
     super();
     this.baseURL = `${process.env.MP_REST_API_ENDPOINT}/tables/`;
   }
 
   public async willSendRequest(request: RequestOptions) {
-    const token = await this.mpAuth.authorize();
+    const token = await this.restAuth.authorize();
     request.headers.set("Authorization", `Bearer ${token}`);
     request.headers.set("Accept", "application/json");
   }

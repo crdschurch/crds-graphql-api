@@ -53,6 +53,11 @@ export const UserResolver = {
       const contact = await dataSources.usersAPI.getContactDetails(user.ContactId);
       return contact.nickName;
     },
+    lastName: async (user, args, { authData, dataSources }: IContext) => { 
+      authorize(authData);
+      const contact = await dataSources.usersAPI.getContactDetails(user.ContactId);
+      return contact.lastName;
+    },
     gender: async (user, args, { authData, dataSources }: IContext) => { 
       authorize(authData);
       const contact = await dataSources.usersAPI.getContactDetails(user.ContactId);

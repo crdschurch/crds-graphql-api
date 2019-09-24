@@ -1,4 +1,4 @@
-import { IMPAuth } from "../../sources/mp";
+import { IRestAuth } from "../../sources/mp";
 import { RESTDataSource, RequestOptions } from "apollo-datasource-rest";
 import { injectable, inject } from "inversify";
 import { IContact, IUsersAPI } from "./users.interface";
@@ -11,7 +11,7 @@ export class UsersAPI extends RESTDataSource implements IUsersAPI {
     process.env.CRDS_ENV === "prod" ? "www" : process.env.CRDS_ENV
   }.crossroads.net/groups/search/small-group`;
 
-  constructor(@inject(Types.MPAuth) private mpAuth: IMPAuth) {
+  constructor(@inject(Types.RestAuth) private mpAuth: IRestAuth) {
     super();
     this.baseURL = `${process.env.MP_REST_API_ENDPOINT}/tables/`;
   }

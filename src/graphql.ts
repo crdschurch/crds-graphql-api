@@ -20,7 +20,7 @@ import { UsersMongo } from "./graph/users/users.mongo";
 import { UsersAPI } from "./graph/users/users.api";
 import { SitesAPI } from "./graph/sites/sites.api";
 import { GroupsAPI } from "./graph/groups/groups.api";
-import { IMPAuth } from "./sources/mp";
+import { IRestAuth } from "./sources/mp";
 
 @injectable()
 export class GraphqlServer {
@@ -35,7 +35,7 @@ export class GraphqlServer {
     @inject(Types.ContentConnector) private contentConnector: IContentConnector,
     @inject(Types.Analytics) private analytics: Analytics,
     @inject(Types.Logger) private logger: Logger,
-    @inject(Types.MPAuth) private mpAuth: IMPAuth,
+    @inject(Types.RestAuth) private restAuth: IRestAuth,
   ) {}
 
   public async start(): Promise<void> {
@@ -58,10 +58,10 @@ export class GraphqlServer {
       },
       dataSources: (): any => {
         return <IDataSources>{
-          usersAPI: new UsersAPI(this.mpAuth),
+          usersAPI: new UsersAPI(this.restAuth),
           usersMongo: new UsersMongo({ usersCollection }),
-          sitesAPI: new SitesAPI(this.mpAuth),
-          groupsAPI: new GroupsAPI(this.mpAuth),
+          sitesAPI: new SitesAPI(this.restAuth),
+          groupsAPI: new GroupsAPI(this.restAuth),
           contentConnector: this.contentConnector,
           analytics: this.analytics,
           logger: this.logger
@@ -89,7 +89,7 @@ export class GraphqlServer {
     server.applyMiddleware({ app, path: "/" });
 
     app.listen({ port: 8000 }, () => {
-      this.mpAuth.authorize();
+      this.restAuth.authorize();
     });
   }
 

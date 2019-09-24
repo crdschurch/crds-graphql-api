@@ -82,7 +82,7 @@ const server = new ApolloServer({
   typeDefs: schema,
   resolvers: resolvers,
   context: () => new MockAuthConnector().authenticate("fakeToken"),
-  dataSources: (): any => ({ usersApi: new MockUsersConnector(), usersMongo: new MockUsersMongo() })
+  dataSources: (): any => ({ usersAPI: new MockUsersConnector(), usersMongo: new MockUsersMongo() })
 });
 
 it("fetches single user with site", async () => {
@@ -236,7 +236,10 @@ it("fetches a users first name and nick name", async () => {
     query: `{
             	user {
 									firstName
-									nickName
+                  nickName
+                  lastName
+                  gender
+                  maritalStatus
 							}
 						}
           `
@@ -245,7 +248,10 @@ it("fetches a users first name and nick name", async () => {
   expect(res.data).toMatchObject({
     user: {
       firstName: "Bob",
-      nickName: "Bobby Boy"
+      nickName: "Bobby Boy",
+      lastName: "Bob2",
+      gender: "male",
+      maritalStatus: "single"
     }
   });
 });
