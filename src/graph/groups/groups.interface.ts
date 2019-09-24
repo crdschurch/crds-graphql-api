@@ -29,6 +29,6 @@ export interface Type {
 }
 
 
-export interface IGroupsConnector {
+export interface IGroupsAPI {
     getGroupImage(ContactID: number): Promise<string>;
 }

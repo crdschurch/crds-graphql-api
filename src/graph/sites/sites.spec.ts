@@ -3,12 +3,12 @@ import { ApolloServer } from 'apollo-server-express';
 import schema from '../../schema';
 import resolvers from '../../resolvers';
 import { injectable } from 'inversify';
-import { ISite, ISitesConnector } from '../sites/sites.interface';
+import { ISite, ISitesAPI } from '../sites/sites.interface';
 import "reflect-metadata";
 import { MockAuthConnector } from '../auth/auth.spec';
 
 @injectable()
-export class MocksSitesConnector implements ISitesConnector {
+export class MocksSitesConnector implements ISitesAPI {
     public getSites(): Promise<ISite[]> {
         return new Promise((resolve, reject) => {
             resolve([

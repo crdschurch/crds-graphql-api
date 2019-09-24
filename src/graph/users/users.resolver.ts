@@ -1,25 +1,13 @@
 import { IContext } from "../context/context.interface";
 import { authorize } from "../../config/authorization";
 import { ValidationError } from "apollo-server-express";
-import graphqlFields from "graphql-fields";
-import { UsersConnector } from "./users.connector";
 
 export const UserResolver = {
   Query: {
     user: async (parent, args, { authData, dataSources }: IContext, info) => {
       info.cacheControl.setCacheHint({ scope: "PRIVATE" });
       authorize(authData);
-      const topLevelFields: string[] = Object.keys(graphqlFields(info));
-      const needsContactInfo = topLevelFields.find(value => -1 !== ["firstName", "lastName", "nickName"].indexOf(value));
-      var user: any = authData.userInfo;
-      if (needsContactInfo)
-        user = {
-          ...user,
-          ...await dataSources.usersConnector.getContactDetails(
-            authData.userInfo.ContactId
-          )
-        };
-      return user;
+      return authData.userInfo;
     }
   },
   Mutation: {
@@ -27,14 +15,14 @@ export const UserResolver = {
       authorize(authData);
       if (Number.isNaN(parseInt(args.siteId)))
         throw new ValidationError(`SiteId: ${args.siteId} is not a number`);
-      return dataSources.usersConnector.setCongregation(
+      return dataSources.usersAPI.setCongregation(
         authData.userInfo.HouseholdId,
         parseInt(args.siteId)
       );
     },
     setLifeStage: (parent, args, { authData, dataSources }: IContext) => {
       authorize(authData);
-      const response = dataSources.usersConnector.setLifeStage(
+      const response = dataSources.usersMongo.setLifeStage(
         authData.userInfo.ContactId,
         args.lifeStage
       );
@@ -55,21 +43,41 @@ export const UserResolver = {
       authorize(authData);
       return authData.userInfo.UserId;
     },
+    firstName: async (user, args, { authData, dataSources }: IContext) => { 
+      authorize(authData);
+      const contact = await dataSources.usersAPI.getContactDetails(user.ContactId);
+      return contact.firstName;
+    },
+    nickName: async (user, args, { authData, dataSources }: IContext) => { 
+      authorize(authData);
+      const contact = await dataSources.usersAPI.getContactDetails(user.ContactId);
+      return contact.nickName;
+    },
+    gender: async (user, args, { authData, dataSources }: IContext) => { 
+      authorize(authData);
+      const contact = await dataSources.usersAPI.getContactDetails(user.ContactId);
+      return contact.gender;
+    },
+    maritalStatus: async (user, args, { authData, dataSources }: IContext) => { 
+      authorize(authData);
+      const contact = await dataSources.usersAPI.getContactDetails(user.ContactId);
+      return contact.maritalStatus;
+    },
     site: (user, args, { authData, dataSources }: IContext) => {
       authorize(authData);
-      return dataSources.usersConnector.getCongregation(
+      return dataSources.usersAPI.getCongregation(
         authData.userInfo.HouseholdId
       );
     },
     groups: (user, args, { authData, dataSources }: IContext) => {
       authorize(authData);
-      return dataSources.usersConnector.getGroups(
+      return dataSources.usersAPI.getGroups(
         authData.userInfo.ParticipantId, args.types, args.expired
       );
     },
     lifeStage: (user, args, { authData, dataSources }: IContext) => {
       authorize(authData);
-      return dataSources.usersConnector.getLifeStage(
+      return dataSources.usersMongo.getLifeStage(
         authData.userInfo.ContactId
       );
     }
