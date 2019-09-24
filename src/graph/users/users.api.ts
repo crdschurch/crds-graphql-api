@@ -57,7 +57,7 @@ export class UsersAPI extends RESTDataSource implements IUsersAPI {
 
   public async getGroups(UserID: number, types?: string[], expired?: boolean): Promise<IGroup[]> {
     var filter = `Group_Participants.[Participant_ID] = ${UserID}`;
-    filter += types ? ` AND Group_ID_Table_Group_Type_ID_Table.[Group_Type] in (${this.sqlIn(types)})` : "";
+    filter += types ? ` AND Group_ID_Table_Group_Type_ID_Table.[Group_Type] ${this.sqlIn(types)}` : "";
     filter +=
       expired != null && !expired
         ? ` AND (Group_ID_Table.[End_Date] > GETDATE() OR Group_ID_Table.[End_Date] is null)
@@ -126,6 +126,6 @@ export class UsersAPI extends RESTDataSource implements IUsersAPI {
   }
 
   private sqlIn(arr: string[]) {
-    return "'" + arr.join("','") + "'";
+    return "in ('" + arr.join("','") + "')";
   }
 }
