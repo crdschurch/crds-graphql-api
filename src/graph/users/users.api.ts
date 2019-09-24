@@ -61,7 +61,7 @@ export class UsersAPI extends RESTDataSource implements IUsersAPI {
     filter +=
       expired != null && !expired
         ? ` AND (Group_ID_Table.[End_Date] > GETDATE() OR Group_ID_Table.[End_Date] is null)
-                                              AND (Group_Participants.[End_Date] > GETDATE() OR Group_Participants.[End_Date] is null)`
+            AND (Group_Participants.[End_Date] > GETDATE() OR Group_Participants.[End_Date] is null)`
         : "";
 
     filter += expired
@@ -69,16 +69,16 @@ export class UsersAPI extends RESTDataSource implements IUsersAPI {
       : "";
 
     const select = `Group_Participants.[Group_Role_ID] as GroupRoleID,
-    Group_Role_ID_Table.[Role_Title] as RoleTitle,
-    Group_ID_Table.[Meeting_Time],
-    Group_ID_Table_Meeting_Day_ID_Table.[Meeting_Day],
-    Group_ID_Table_Meeting_Frequency_ID_Table.[Meeting_Frequency],
-    Group_ID_Table.[Group_ID],
-    Group_ID_Table.[Group_Name],
-    Group_ID_Table.[Group_Type_ID] as GroupTypeID,
-    Group_ID_Table_Group_Type_ID_Table.[Group_Type] as GroupTypeName,
-    Group_ID_Table.[Primary_Contact],
-    Group_ID_Table.[End_Date]`;
+                    Group_Role_ID_Table.[Role_Title] as RoleTitle,
+                    Group_ID_Table.[Meeting_Time],
+                    Group_ID_Table_Meeting_Day_ID_Table.[Meeting_Day],
+                    Group_ID_Table_Meeting_Frequency_ID_Table.[Meeting_Frequency],
+                    Group_ID_Table.[Group_ID],
+                    Group_ID_Table.[Group_Name],
+                    Group_ID_Table.[Group_Type_ID] as GroupTypeID,
+                    Group_ID_Table_Group_Type_ID_Table.[Group_Type] as GroupTypeName,
+                    Group_ID_Table.[Primary_Contact],
+                    Group_ID_Table.[End_Date]`;
 
     return this.get("Group_Participants", {
       $filter: filter,
