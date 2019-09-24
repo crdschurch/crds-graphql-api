@@ -22,5 +22,7 @@ export default gql`
     nickName: String
     firstName: String
     lastName: String
+    gender: String
+    maritalStatus: String
   }
 `;
