@@ -72,6 +72,11 @@ export const UserResolver = {
       const contact = await dataSources.usersAPI.getContactDetails(user.ContactId);
       return contact.email;
     },
+    created_at: async (user, args, { authData, dataSources }: IContext) => { 
+      authorize(authData);
+      const contact = await dataSources.usersAPI.getContactDetails(user.ContactId);
+      return contact.created_at;
+    },
     site: (user, args, { authData, dataSources }: IContext) => {
       authorize(authData);
       return dataSources.usersAPI.getCongregation(

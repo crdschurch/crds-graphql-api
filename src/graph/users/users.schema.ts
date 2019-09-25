@@ -25,5 +25,6 @@ export default gql`
     gender: String
     maritalStatus: String
     email: String
+    created_at: Float
   }
 `;

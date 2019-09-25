@@ -24,6 +24,7 @@ export interface IUser {
     gender?: string
     maritalStatus?: string
     email?: string
+    created_at?: number
 }
 
 export interface IContact {
@@ -33,5 +34,6 @@ export interface IContact {
     gender: string
     maritalStatus: string
     email?: string
+    created_at?: number
   }
   
