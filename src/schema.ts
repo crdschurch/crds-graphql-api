@@ -16,12 +16,13 @@ const linkSchema = gql`
   type Subscription {
     _: Boolean
   }
+
+  directive @cacheControl(maxAge: Int, scope: CacheControlScope) on OBJECT | FIELD_DEFINITION
+
+  enum CacheControlScope {
+    PUBLIC
+    PRIVATE
+  }
 `;
 
-export default [
-  linkSchema,
-  userSchema,
-  siteSchema,
-  groupsSchema,
-  ...contentSchema
-];
+export default [linkSchema, userSchema, siteSchema, groupsSchema, ...contentSchema];

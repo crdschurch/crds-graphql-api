@@ -5,7 +5,6 @@ import { ValidationError } from "apollo-server-express";
 export const UserResolver = {
   Query: {
     user: async (parent, args, { authData, dataSources }: IContext, info) => {
-      info.cacheControl.setCacheHint({ scope: "PRIVATE" });
       authorize(authData);
       return authData.userInfo;
     }
