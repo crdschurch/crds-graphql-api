@@ -24,7 +24,7 @@ export class UsersAPI extends RESTDataSource implements IUsersAPI {
 
   public async getContactDetails(ContactID: number): Promise<IContact> {
     const filter = `Contacts.[Contact_ID] = ${ContactID}`;
-    const select = "Nickname, First_Name, Last_Name, Gender_ID_Table.Gender, Marital_Status_ID_Table.Marital_Status";
+    const select = "Nickname, First_Name, Last_Name, Gender_ID_Table.Gender, Marital_Status_ID_Table.Marital_Status, Email_Address";
 
     return this.get("Contacts", {
       $filter: filter,
@@ -35,7 +35,8 @@ export class UsersAPI extends RESTDataSource implements IUsersAPI {
         firstName: data[0].First_Name,
         lastName: data[0].Last_Name,
         gender: data[0].Gender,
-        maritalStatus: data[0].Marital_Status
+        maritalStatus: data[0].Marital_Status,
+        email: data[0].Email_Address
       };
     });
   }

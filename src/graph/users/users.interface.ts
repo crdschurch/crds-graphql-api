@@ -23,6 +23,7 @@ export interface IUser {
     lastName?: string
     gender?: string
     maritalStatus?: string
+    email?: string
 }
 
 export interface IContact {
@@ -31,5 +32,6 @@ export interface IContact {
     lastName: string
     gender: string
     maritalStatus: string
+    email?: string
   }
   
