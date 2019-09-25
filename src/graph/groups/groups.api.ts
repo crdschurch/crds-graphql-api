@@ -18,7 +18,7 @@ export class GroupsAPI extends RESTDataSource implements IGroupsAPI {
 
   public async getGroupImage(ContactID: number): Promise<string> {
     const filter = `Participants.[Contact_ID] = ${ContactID}`;
-    return this.get("Households", {
+    return this.get("Participants", {
       $filter: filter
     }).then(data => {
       return `${process.env.GCP_STORAGE_ENDPOINT}/${process.env.GCP_STORAGE_BUCKET}/${data[0].Participant_ID}.png`;
