@@ -2,7 +2,7 @@ import { gql } from "apollo-server-express";
 
 export default gql`
   extend type Query {
-    sites(filter: String): [Site!]
+    sites(availableOnline: Boolean): [Site!]
   }
 
   type Site {

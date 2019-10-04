@@ -2,12 +2,14 @@ import { IUser } from "../users/users.interface";
 
 export interface IGroup {
     id: number
+    url: string
     name: string
     meeting: Meeting
     role: Role
     type: Type
     leader: IUser
     image: string
+    endDate: string
 }
 
 export interface Meeting {
@@ -27,6 +29,6 @@ export interface Type {
 }
 
 
-export interface IGroupsConnector {
+export interface IGroupsAPI {
     getGroupImage(ContactID: number): Promise<string>;
 }
