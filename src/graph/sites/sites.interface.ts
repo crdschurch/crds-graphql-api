@@ -1,5 +1,5 @@
-export interface ISitesConnector {
-    getSites(filters?: string): Promise<ISite[]>
+export interface ISitesAPI {
+    getSites(availableOnline?: boolean): Promise<ISite[]>
 }
 
 export interface ISite {

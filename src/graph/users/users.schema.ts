@@ -10,17 +10,21 @@ export default gql`
     setSite(siteId: ID!): User
   }
   extend type Mutation {
-    "set the site of user"
+    "set the lifeStage of user"
     setLifeStage(lifeStage: LifeStageInput): User
   }
 
-  type User {
+  type User @cacheControl(scope: PRIVATE){
     id: ID!
     site: Site
-    groups: [Group!]
+    groups(types: [String], expired: Boolean): [Group!]
     lifeStage: LifeStage
     nickName: String
     firstName: String
     lastName: String
+    gender: String
+    maritalStatus: String
+    email: String
+    created_at: Float
   }
 `;

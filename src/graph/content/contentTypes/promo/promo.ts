@@ -11,7 +11,7 @@ export default class Promo extends Content {
     var fields = entry.fields;
     this.slug = fields.link_url;
     this.date = ContentUtils.formatDate(fields.published_at);
-    this.description = ContentUtils.removeMarkdown(fields.description);
+    this.description = fields.description;
     this.targetAudience = fields.target_audience;
   }
 
