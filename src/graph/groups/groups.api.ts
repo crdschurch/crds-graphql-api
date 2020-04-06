@@ -16,12 +16,15 @@ export class GroupsAPI extends RESTDataSource implements IGroupsAPI {
     request.headers.set("Accept", "application/json");
   }
 
-  public async getGroupImage(ContactID: number): Promise<string> {
-    const filter = `Participants.[Contact_ID] = ${ContactID}`;
-    return this.get("Participants", {
-      $filter: filter
-    }).then(data => {
-      return `${process.env.GCP_STORAGE_ENDPOINT}/${process.env.GCP_STORAGE_BUCKET}/${data[0].Participant_ID}.png`;
-    });
+  public async getGroupImage(contactId: number): Promise<string> {
+    this.baseURL = `${process.env.MP_REST_API_ENDPOINT}/files/`;
+    try {
+      const fileMetas = await this.get(`Contacts/${contactId}`);
+      const profileImageMeta = fileMetas.find((f) => f.IsDefaultImage);
+      if (!profileImageMeta) return null;
+      return `https://admin${process.env.ENV_SUBDOMAIN}.crossroads.net/ministryplatformapi/files/${profileImageMeta.UniqueFileId}`;
+    } catch (err) {
+      return null;
+    }
   }
 }
