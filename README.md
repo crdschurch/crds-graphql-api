@@ -1,3 +1,6 @@
+# THIS REPOSITORY IS ARCHIVED. PLEASE SEE CRDS-GRAPHQL-GATEWAY FOR ANY ACTIVE DEVELOPMENT
+
+
 # crds-graphql-api
 
 Central GraphQL service to consume and graph all data micro services. Built and deployed to Kubernetes via TeamCity.
